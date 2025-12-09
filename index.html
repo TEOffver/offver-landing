@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- PREVENT MOBILE ZOOM -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>offver – browse. verify. connect.</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --orange: #FF6600;
+      --text: #050505;
+      --bg: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Urbanist', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* PREVENT IPHONE ZOOM ON INPUT */
+    input, select, textarea {
+      font-size: 16px !important;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .page {
+      padding: 40px 72px 56px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .nav {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .nav span { color: var(--orange); }
+
+    .waitlist-btn {
+      padding: 10px 22px;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .hero-left {
+      max-width: 500px;
+      flex: 1;
+    }
+
+    .heading {
+      font-size: 56px;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-bottom: 20px;
+    }
+    .heading span { color: var(--orange); }
+
+    .subtext {
+      font-size: 18px;
+      margin-bottom: 28px;
+      color: #1f2937;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .store-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #000;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .store-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .hero-right img {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .coming-soon {
+      font-size: 56px;
+      color: var(--orange);
+      text-align: center;
+      margin-top: 40px;
+      font-weight: 700;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #555;
+    }
+
+    /* ---------------------------------------- */
+    /* MOBILE UPDATE — YOUR NEW REQUESTS FIXED */
+    /* ---------------------------------------- */
+    @media (max-width: 768px) {
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .heading {
+        font-size: 42px;        /* BIGGER than offver logo */
+        white-space: normal;    /* allow stacking */
+        text-align: center;
+        line-height: 1.15;
+      }
+
+      /* Force stacking of the words on small screens */
+      .heading {
+        display: block;
+      }
+
+      .store-buttons {
+        justify-content: center;
+      }
+
+      .hero-right img {
+        max-width: 90%;
+        margin-top: 24px;
+      }
+    }
+
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .modal-box {
+      background: #fff;
+      padding: 32px;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 26px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #777;
+    }
+
+    .modal-box h2 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .modal-box p {
+      margin-bottom: 22px;
+      font-size: 16px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .modal-box label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      margin-top: 10px;
+    }
+
+    .modal-box input,
+    .modal-box select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      margin-bottom: 14px;
+    }
+
+    .submit-btn {
+      background: var(--orange);
+      color: #fff;
+      width: 100%;
+      padding: 14px;
+      border-radius: 999px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div class="nav-container">
+    <div class="nav">off<span>ver</span></div>
+    <button class="waitlist-btn" onclick="openModal()">join waitlist</button>
+  </div>
+
+  <section class="hero">
+    <div class="hero-left">
+
+      <h1 class="heading">browse. verify. <span>connect.</span></h1>
+
+      <p class="subtext">
+        reinventing how commission-free real estate deals start by transforming how buyers and sellers connect
+      </p>
+
+      <div class="store-buttons">
+        <a class="store-btn" href="#">
+          <svg viewBox="0 0 24 24">
+            <path d="M16.365 1.43c0 1.14-.45 2.2-1.27 3.11-.81.9-1.92 1.46-3.07 1.37-.14-1.18.42-2.31 1.23-3.12.81-.89 2.05-1.56 3.11-1.36zM19.42 16.52c-.41.95-.6 1.37-1.13 2.23-.73 1.19-1.76 2.68-3.04 2.68-1.11 0-1.41-.71-3.01-.71-1.63 0-1.95.73-3.06.73-1.28 0-2.25-1.37-2.98-2.56C4.63 16.3 3.5 12.11 5.44 9.21c.83-1.18 2.31-1.94 3.78-1.94 1.21 0 2.36.8 3.02.8.63 0 2-.97 3.47-.82.59.03 2.26.23 3.34 1.76-2.85 1.63-2.4 5.52.37 6.51z"/>
+          </svg>
+          App Store
+        </a>
+
+        <a class="store-btn" href="#">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 2l13 10L3 22V2zm15.5 10l-11.2 9L18 12zm0-1L3 2l11.2 9L18 11z"/>
+          </svg>
+          Google Play
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <img src="hero.png" alt="">
+    </div>
+  </section>
+
+  <div class="coming-soon">coming soon</div>
+  <div class="footer">© offver technologies inc. 2025</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal" onclick="clickOutside(event)">
+  <div class="modal-box" id="modalBox">
+
+    <button class="close-btn" onclick="closeModal()">×</button>
+
+    <h2>Join the waitlist</h2>
+    <p>Be first in line as we launch a new era of off-market real estate private sales.</p>
+
+    <form id="waitlistForm">
+
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="New Waitlist Signup">
+
+      <label>Full Name</label>
+      <input name="Full Name" type="text" required>
+
+      <label>Email Address</label>
+      <input name="Email Address" type="email" required>
+
+      <label>City you're buying or selling in</label>
+      <input name="City" type="text" required>
+
+      <label>Are you looking to buy, sell, or both?</label>
+      <select name="Intent" required>
+        <option value="">Select an option</option>
+        <option value="Buy">Buy</option>
+        <option value="Sell">Sell</option>
+        <option value="Both">Both</option>
+      </select>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById("modal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  function clickOutside(e) {
+    const modalBox = document.getElementById("modalBox");
+    if (!modalBox.contains(e.target)) closeModal();
+  }
+
+  document.getElementById("waitlistForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const data = new FormData(this);
+
+    fetch("https://formsubmit.co/info@offver.com", {
+      method: "POST",
+      body: data,
+      headers: { "Accept": "application/json" }
+    }).then(() => {
+      document.getElementById("modalBox").innerHTML = `
+        <h2>You're on the list! 🎉</h2>
+        <p>Thank you for joining the offver waitlist.<br>We’ll be in touch soon.</p>
+        <button class="submit-btn" onclick="closeModal()">Close</button>
+      `;
+    });
+  });
+</script>
+
+</body>
+</html>
+
+
