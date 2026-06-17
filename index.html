@@ -1,327 +1,987 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>offver — Off-Market Discovery Digitized</title>
 
-  <!-- PREVENT MOBILE ZOOM -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<link rel="icon" type="image/png" href="favicon.png">
 
-  <title>offver – browse. verify. connect.</title>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- FAVICON -->
-  <link rel="icon" type="image/png" href="favicon.png">
+<style>
+:root{
+  --black:#000;
+  --white:#fff;
+  --text:#111;
+  --muted:#666;
+  --divider:rgba(0,0,0,.06);
+  --border:rgba(0,0,0,.10);
+  --radius:18px;
+  --shadow:0 20px 60px rgba(0,0,0,.10);
+  --accent:#ff6600;
+  --page:#ffffff;
+  --promo:#ffd2bd;
+  --header-h:76px;
+}
 
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+*{box-sizing:border-box;margin:0;padding:0;}
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8PF1S87QSN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+body{
+  font-family:"Urbanist", sans-serif;
+  background:var(--page);
+  color:var(--text);
+}
 
-  gtag('config', 'G-8PF1S87QSN');
-</script>
+body.menu-open{
+  overflow:hidden;
+}
 
-  <style>
-    :root {
-      --orange: #FF6600;
-      --text: #050505;
-      --bg: #ffffff;
-    }
+a{text-decoration:none;color:inherit;}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 20px;
+}
 
-    body {
-      font-family: 'Urbanist', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+/* HEADER — WHITE WITH FAINT DIVIDER */
+.header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#fff;
+  border-bottom:1px solid var(--divider);
+}
 
-    /* PREVENT IPHONE ZOOM ON INPUT */
-    input, select, textarea {
-      font-size: 16px !important;
-      -webkit-text-size-adjust: 100%;
-    }
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 0;
+  gap:16px;
+}
 
-    .page {
-      padding: 40px 72px 56px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+.brand{
+  font-weight:800;
+  font-size:26px;
+  letter-spacing:-0.5px;
+  white-space:nowrap;
+}
+.brand span:first-child{color:#000;}
+.brand span:last-child{color:var(--accent);}
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 48px;
-    }
+.nav{
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
 
-    .nav {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-    }
-    .nav span { color: var(--orange); }
+.nav a{
+  font-weight:600;
+  font-size:18px;
+  color:#333;
+}
+.nav a:hover{ color:#000; }
 
-    .waitlist-btn {
-      padding: 10px 22px;
-      background: var(--orange);
-      color: #fff;
-      border-radius: 999px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-    }
+/* Right side actions */
+.actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
+/* Join waitlist button (ORANGE w/ WHITE text) */
+.btn{
+  border:1px solid var(--accent);
+  padding:8px 16px;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+  background:var(--accent);
+  color:#fff;
+  transition:.2s ease;
+  white-space:nowrap;
+}
+.btn:hover{
+  filter:brightness(.95);
+}
 
-    .hero-left {
-      max-width: 500px;
-      flex: 1;
-    }
+/* Hamburger */
+.hamburger{
+  display:none;
+  border:1px solid rgba(0,0,0,.18);
+  background:#fff;
+  border-radius:999px;
+  width:42px;
+  height:42px;
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  transition:.2s ease;
+}
+.hamburger:hover{
+  background:rgba(0,0,0,.04);
+}
 
-    .heading {
-      font-size: 56px;
-      font-weight: 700;
-      white-space: nowrap;
-      margin-bottom: 20px;
-    }
-    .heading span { color: var(--orange); }
+.hamburger .lines{
+  width:18px;
+  height:12px;
+  position:relative;
+}
+.hamburger .lines span{
+  position:absolute;
+  left:0;
+  right:0;
+  height:2px;
+  background:#111;
+  border-radius:2px;
+  transition:transform .2s ease, top .2s ease, opacity .2s ease;
+}
+.hamburger .lines span:nth-child(1){ top:0; }
+.hamburger .lines span:nth-child(2){ top:5px; }
+.hamburger .lines span:nth-child(3){ top:10px; }
 
-    .subtext {
-      font-size: 18px;
-      margin-bottom: 28px;
-      color: #1f2937;
-      font-weight: 500;
-      line-height: 1.45;
-    }
+/* Animated X when open */
+.hamburger[aria-expanded="true"] .lines span:nth-child(1){
+  top:5px;
+  transform:rotate(45deg);
+}
+.hamburger[aria-expanded="true"] .lines span:nth-child(2){
+  opacity:0;
+}
+.hamburger[aria-expanded="true"] .lines span:nth-child(3){
+  top:5px;
+  transform:rotate(-45deg);
+}
 
-    .store-buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
+/* Mobile menu panel */
+.mobile-menu{
+  display:none;
+  background:#fff;
+  border-bottom:1px solid var(--divider);
+}
 
-    .store-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #000;
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 12px;
-      font-size: 14px;
-      text-decoration: none;
-      font-weight: 600;
-    }
+.mobile-menu.open{
+  display:block;
+}
 
-    .store-btn svg {
-      width: 22px;
-      height: 22px;
-      fill: #fff;
-    }
+@media (max-width: 900px){
 
-    .hero-right img {
-      width: 100%;
-      max-width: 640px;
-    }
+  .mobile-menu{
+    position:fixed;
+    left:0;
+    right:0;
+    top:var(--header-h);
+    background:#fff;
+    border-bottom:1px solid var(--divider);
+    z-index:999;
+    max-height:calc(100vh - var(--header-h));
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+  }
 
-    .coming-soon {
-      font-size: 56px;
-      color: var(--orange);
-      text-align: center;
-      margin-top: 40px;
-      font-weight: 700;
-    }
+  :root{
+    --header-h:88px;
+  }
 
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      color: #555;
-    }
+/* HERO mobile spacing fix */
+.hero-wrap{
+  min-height:auto;
+  padding:24px 0 24px;
+  align-items:flex-start;
+}
 
-    /* ---------------------------------------- */
-    /* MOBILE UPDATE — YOUR NEW REQUESTS FIXED */
-    /* ---------------------------------------- */
-    @media (max-width: 768px) {
+.hero{
+  gap:22px;
+}
 
-      .hero {
-        flex-direction: column;
-        text-align: center;
-      }
+.hero h1{
+  font-size:38px;
+  line-height:1.05;
+  letter-spacing:-1.2px;
+  margin-bottom:8px;
+  font-weight:800;
+}
 
-      .heading {
-        font-size: 42px;        /* BIGGER than offver logo */
-        white-space: normal;    /* allow stacking */
-        text-align: center;
-        line-height: 1.15;
-      }
+.lead{
+  font-size:18px;
+  line-height:1.55;
+}
 
-      /* Force stacking of the words on small screens */
-      .heading {
-        display: block;
-      }
+.hero p{
+  margin-bottom:20px;
+}
 
-      .store-buttons {
-        justify-content: center;
-      }
+.hero-image{
+  width:70%;
+  max-width:200px;
+  height:auto;
+  object-fit:contain;
+  border-radius:22px;
+}
 
-      .hero-right img {
-        max-width: 90%;
-        margin-top: 24px;
-      }
-    }
+} /* closes mobile media query */
 
-    .modal-bg {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-    }
+.mobile-menu .container{
+  padding-top:8px;
+  padding-bottom:16px;
+}
 
-    .modal-box {
-      background: #fff;
-      padding: 32px;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 480px;
-      position: relative;
-    }
+.mobile-menu a{
+  display:block;
+  padding:12px 10px;
+  border-radius:14px;
+  font-weight:700;
+  color:#111;
+}
 
-    .close-btn {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      font-size: 26px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #777;
-    }
+.mobile-menu a:hover{
+  background:rgba(0,0,0,.04);
+}
 
-    .modal-box h2 {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
+/* HERO */
+main{ padding:0; }
 
-    .modal-box p {
-      margin-bottom: 22px;
-      font-size: 16px;
-      color: #555;
-      line-height: 1.4;
-    }
+.hero-wrap{
+  min-height: calc(100vh - var(--header-h)); 
+  display:flex;
+  align-items:center;
+}
 
-    .modal-box label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-      margin-top: 10px;
-    }
+.hero{
+  width:100%;
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items:center;
+  gap:100px;
+}
 
-    .modal-box input,
-    .modal-box select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      margin-bottom: 14px;
-    }
+.hero-left{
+  padding-left:40px;
+}
 
-    .submit-btn {
-      background: var(--orange);
-      color: #fff;
-      width: 100%;
-      padding: 14px;
-      border-radius: 999px;
-      font-size: 18px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-    }
-  </style>
+.hero h1{
+  font-size:64px;
+  line-height:1.05;
+  letter-spacing:-1.6px;
+  margin-bottom:22px;
+}
+
+.hero p{
+  margin-bottom:32px; /* spacing only */
+}
+
+.lead{
+  font-size:22px;
+  line-height:1.7;
+  max-width:600px;
+  color:#333;
+}
+
+/* APP STORE BUTTONS */
+.store-buttons{
+  display:flex;
+  gap:16px;
+  margin-top:28px;
+  flex-wrap:wrap;
+}
+
+.store-buttons a{
+  display:inline-flex;
+}
+
+.store-buttons a img{
+  height:48px;
+  display:block;
+  transition:transform .2s ease;
+}
+
+.store-buttons a:hover img{
+  transform:translateY(-3px);
+}
+
+.hero-right{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.hero-image{
+  width:100%;
+  max-width:520px;
+  height:520px;           
+  object-fit:cover;       
+  border-radius:28px;
+  box-shadow:0 40px 80px rgba(0,0,0,.15);
+}
+
+.image-placeholder{
+  width:100%;
+  max-width:520px;
+  height:520px;
+  border-radius:28px;
+  background:#f2f2f2;
+  border:1px solid rgba(0,0,0,.06);
+}
+
+.hero-content{
+  position:relative;
+  z-index:5;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  width:100%;
+  min-height:calc(100vh - var(--header-h));
+
+  text-align:center;
+}
+
+.hero-copy{
+  max-width:900px;
+  margin:0 auto;
+  transform:translateY(-100px);
+}
+
+.hero-copy h1{
+  font-size:72px;
+  line-height:.92;
+  letter-spacing:-4px;
+  font-weight:800;
+  margin-bottom:28px;
+  color:#111;
+}
+
+.hero-copy p{
+  font-size:24px;
+  line-height:1.45;
+  max-width:800px;
+  margin:0 auto 38px;
+  color:#333;
+}
+
+.hero-actions{
+  display:flex;
+  justify-content:center;
+}
+
+.hero-btn{
+  padding:18px 38px;
+  font-size:24px;
+}
+
+.city-hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fff7f2 100%
+  );
+}
+
+.city-bg{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+}
+
+.hero-content{
+  position:relative;
+  z-index:5;
+}
+
+.city-track{
+  position:absolute;
+  bottom:0;
+  display:flex;
+  align-items:flex-end;
+  gap:34px;
+  width:max-content;
+  animation:cityScroll 55s linear infinite;
+  opacity:1;
+}
+
+@keyframes cityScroll{
+  from{
+    transform:translateX(-50%);
+  }
+  to{
+    transform:translateX(0);
+  }
+}
+
+/* BUILDINGS */
+
+.city-building{
+  width:92px;
+  height:220px;
+  position:relative;
+  background:linear-gradient(180deg,#c9c5c1,#aaa5a1);
+  border-radius:12px 12px 0 0;
+  box-shadow:
+    0 16px 35px rgba(0,0,0,.12),
+    inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.city-building::after{
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  top:42px;
+  bottom:24px;
+
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      #ffd2a6 0 12px,
+      transparent 12px 24px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      #ffd2a6 0 12px,
+      transparent 12px 24px
+    );
+
+  background-size:
+    16px 24px,
+    16px 24px;
+
+  background-position:
+    left top,
+    right top;
+
+  background-repeat:
+    repeat-y,
+    repeat-y;
+
+  filter:
+    drop-shadow(0 0 5px rgba(255,140,0,.75))
+    drop-shadow(0 0 14px rgba(255,140,0,.45));
+}
+
+.city-building::before{
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  top:-22px;
+  height:22px;
+  background:linear-gradient(180deg,#d8d5d1,#b8b3af);
+  border-radius:6px 6px 0 0;
+  box-shadow:
+    0 -12px 0 -5px #c9c5c1,
+    0 -22px 0 -11px #b9b4b0;
+}
+
+/* HEIGHT VARIATIONS */
+
+.city-building:nth-child(3n){
+  height:260px;
+}
+
+.city-building:nth-child(4n){
+  height:190px;
+}
+
+.city-building:nth-child(5n){
+  height:170px;
+}
+
+.city-building:nth-child(6n){
+  width:72px;
+  height:235px;
+}
+
+/* angled modern roof */
+.city-building:nth-child(4n)::before{
+  left:0;
+  right:0;
+  top:-26px;
+  height:28px;
+  clip-path:polygon(0 100%,100% 55%,100% 100%,0 100%);
+  border-radius:0;
+}
+
+/* slim tower */
+.city-building:nth-child(6n)::after{
+  left:18px;
+  right:18px;
+  background-size:
+    13px 25px,
+    13px 25px;
+}
+
+/* HOUSES */
+
+.city-house{
+  width:92px;
+  height:82px;
+  position:relative;
+  background:linear-gradient(180deg,#c9c5c1,#aaa5a1);
+  box-shadow:
+    0 14px 28px rgba(0,0,0,.10),
+    inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.city-house::before{
+  content:"";
+  position:absolute;
+  left:-8px;
+  right:-8px;
+  top:-58px;
+  height:64px;
+  background:#b4afab;
+  clip-path:polygon(50% 0,100% 70%,100% 100%,0 100%,0 70%);
+}
+
+.city-house::after{
+  content:"";
+  position:absolute;
+  left:22px;
+  right:22px;
+  top:18px;
+  height:42px;
+
+  background-image:
+    linear-gradient(#ffd2a6 0 0),
+    linear-gradient(#ffd2a6 0 0),
+    linear-gradient(#ffd2a6 0 0),
+    linear-gradient(#ffd2a6 0 0);
+
+  background-size:
+    13px 12px,
+    13px 12px,
+    13px 12px,
+    13px 12px;
+
+  background-position:
+    left top,
+    right top,
+    left bottom,
+    right bottom;
+
+  background-repeat:no-repeat;
+
+  filter:
+    drop-shadow(0 0 5px rgba(255,140,0,.7))
+    drop-shadow(0 0 12px rgba(255,140,0,.4));
+}
+
+/* TREES */
+
+.city-tree{
+  width:28px;
+  height:95px;
+  position:relative;
+}
+
+.city-tree::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:5px;
+  height:48px;
+  background:#77716c;
+  transform:translateX(-50%);
+}
+
+.city-tree::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:36px;
+  width:34px;
+  height:56px;
+  background:linear-gradient(180deg,#9d9a94,#77746f);
+  border-radius:50% 50% 48% 48%;
+  transform:translateX(-50%);
+}
+
+/* GROUND SHADOW */
+
+.city-bg::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:34px;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.12));
+  pointer-events:none;
+}
+
+/* MOBILE */
+@media (max-width:900px){
+
+  .promo-card{
+    grid-template-columns:1fr;
+    gap:28px;
+    padding:34px;
+    height:auto;
+  }
+
+  .hero-phone{
+    justify-content:center;
+    margin-top:10px;
+  }
+
+  .hero-phone::after{
+    right:auto;
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+
+  .hero-phone .phone{
+    width:min(260px,70vw);
+    height:calc(min(260px,70vw) * 1.9);
+  }
+
+  .promo-card h2{
+    font-size:52px;
+  }
+
+  .promo-card p{
+    font-size:18px;
+  }
+
+  .promo-zone{
+    display:none;
+  }
+
+  .promo-steps{
+    justify-content:flex-start;
+    flex-wrap:wrap;
+  }
+}
+
+
+/* FOOTER — WHITE WITH DIVIDER */
+.footer{
+  background:#fff;
+  border-top:1px solid var(--divider);
+  padding:30px 0;
+}
+
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:20px;
+  color:#444;
+}
+
+.footer a{
+  color:#444;
+  font-weight:600;
+}
+.footer a:hover{ color:#000; }
+
+/* WAITLIST MODAL */
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:200;
+}
+
+.modal-box{
+  background:#fff;
+  width:100%;
+  max-width:520px;
+  border-radius:24px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  position:relative;
+}
+
+.modal-box h2{
+  margin-bottom:10px;
+  font-weight:800;
+}
+.modal-box p{
+  margin-bottom:18px;
+  color:#555;
+}
+
+.modal-box label{
+  display:block;
+  margin-top:10px;
+  font-weight:700;
+  color:#111;
+}
+
+.modal-box input,
+.modal-box select{
+  width:100%;
+  padding:12px;
+  margin-top:6px;
+  margin-bottom:14px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.10);
+  font-family:inherit;
+}
+
+.submit-btn{
+  width:100%;
+  padding:14px;
+  border-radius:999px;
+  border:none;
+  background:var(--accent);
+  color:#fff;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.submit-btn:hover{
+  filter:brightness(.95);
+}
+
+.close-btn{
+  position:absolute;
+  right:18px;
+  top:12px;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  line-height:1;
+}
+
+/* TABLET */
+@media (max-width: 1200px){
+  .header .container{
+    padding:0 28px;
+  }
+
+  .header{
+    padding:10px 0;
+  }
+
+  .header-inner{
+    padding:0;
+  }
+}
+
+/* MOBILE */
+@media (max-width:900px){
+
+  .header .container{
+    padding:0 28px;
+  }
+
+  @media (max-width:900px){
+  .header{
+    padding:10px 0;
+  }
+}
+
+  .nav{ 
+    display:none; 
+  }
+
+  .hamburger{ 
+    display:flex; 
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .hero-image{
+    height:420px;
+  }
+
+  .hero-left{
+    padding-left:0;
+  }
+
+  .hero h1{
+    font-size:40px;
+    margin-bottom:8px;
+  }
+
+  .lead{
+    font-size:18px;
+    margin-bottom:8px;
+  }
+
+  .hero-right{
+    justify-content:flex-start;
+  }
+
+  .image-placeholder{
+    max-width:100%;
+    height:260px;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .store-buttons a img{
+    height:44px;
+  }
+
+  .promo-card{
+    grid-template-columns:1fr;
+    padding:26px;
+    gap:18px;
+  }
+
+  .promo-card h2{
+    font-size:52px;
+  }
+
+  .promo-media{
+    height:260px;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width:600px){
+  .header .container{
+    padding:0 36px;
+  }
+}
+
+</style>
+
 </head>
 
 <body>
 
-<div class="page">
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand"><span>off</span><span>ver</span></div>
 
-  <div class="nav-container">
-    <div class="nav">off<span>ver</span></div>
-    <button class="waitlist-btn" onclick="openModal()">join waitlist</button>
+    <div class="nav">
+  <a href="buyer.html">buyer</a>
+  <a href="seller.html">seller</a>
+  <a href="professional.html">professional</a>
+  <a href="about.html">about</a>
+</div>
+
+    <div class="actions">
+      <div class="btn" onclick="openModal()">join waitlist</div>
+
+      <button class="hamburger" id="hamburger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu">
+        <div class="lines" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
   </div>
+</header>
 
-  <section class="hero">
-    <div class="hero-left">
+<!-- Mobile dropdown menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="container">
+    <a href="buyer.html">buyer</a>
+    <a href="seller.html">seller</a>
+    <a href="professional.html">professional</a>
+    <a href="about.html">about</a>
+  </div>
+</div>
 
-      <h1 class="heading">browse. verify. <span>connect.</span></h1>
+<main>
+ <section class="hero-wrap city-hero">
 
-      <p class="subtext">
-        transforming how buyers and sellers connect
-      </p>
+  <div class="city-bg">
+  <div class="city-track">
 
-      <div class="store-buttons">
-        <a class="store-btn" href="#">
-          <svg viewBox="0 0 24 24">
-            <path d="M16.365 1.43c0 1.14-.45 2.2-1.27 3.11-.81.9-1.92 1.46-3.07 1.37-.14-1.18.42-2.31 1.23-3.12.81-.89 2.05-1.56 3.11-1.36zM19.42 16.52c-.41.95-.6 1.37-1.13 2.23-.73 1.19-1.76 2.68-3.04 2.68-1.11 0-1.41-.71-3.01-.71-1.63 0-1.95.73-3.06.73-1.28 0-2.25-1.37-2.98-2.56C4.63 16.3 3.5 12.11 5.44 9.21c.83-1.18 2.31-1.94 3.78-1.94 1.21 0 2.36.8 3.02.8.63 0 2-.97 3.47-.82.59.03 2.26.23 3.34 1.76-2.85 1.63-2.4 5.52.37 6.51z"/>
-          </svg>
-          App Store
-        </a>
+  <div class="city-house"></div>
+  <div class="city-building"></div>
+  <div class="city-tree"></div>
+  <div class="city-building"></div>
+  <div class="city-house"></div>
+  <div class="city-building"></div>
+  <div class="city-building"></div>
+  <div class="city-tree"></div>
+  <div class="city-house"></div>
+  <div class="city-building"></div>
+  <div class="city-tree"></div>
+  <div class="city-building"></div>
+  <div class="city-house"></div>
+  <div class="city-building"></div>
 
-        <a class="store-btn" href="#">
-          <svg viewBox="0 0 24 24">
-            <path d="M3 2l13 10L3 22V2zm15.5 10l-11.2 9L18 12zm0-1L3 2l11.2 9L18 11z"/>
-          </svg>
-          Google Play
-        </a>
+  <div class="city-house"></div>
+  <div class="city-building"></div>
+  <div class="city-tree"></div>
+  <div class="city-building"></div>
+  <div class="city-house"></div>
+  <div class="city-building"></div>
+  <div class="city-building"></div>
+  <div class="city-tree"></div>
+  <div class="city-house"></div>
+  <div class="city-building"></div>
+  <div class="city-tree"></div>
+  <div class="city-building"></div>
+  <div class="city-house"></div>
+  <div class="city-building"></div>
+
+</div>
+
+  <div class="container hero-content">
+
+  <div class="hero-copy">
+
+    <h1>
+      off-market is<br>
+      the new market
+    </h1>
+
+    <p>
+      signal buying or selling intent and
+      connect before properties are listed.
+    </p>
+
       </div>
     </div>
 
-    <div class="hero-right">
-      <img src="hero.png" alt="">
-    </div>
-  </section>
+  </div>
 
-  <div class="coming-soon">coming soon</div>
-
-<div class="footer">
-  © offver technologies inc. 2026 ·
-  <a href="privacy.html" style="cursor:pointer; text-decoration:underline; color:inherit;">Privacy Policy</a>
-  ·
-  <a href="acceptable-use.html" style="cursor:pointer; text-decoration:underline; color:inherit;">Acceptable Use</a>
-  ·
-  <a href="terms-of-service.html" style="cursor:pointer; text-decoration:underline; color:inherit;">Terms of Service</a>
-  ·
-  <a href="delete-account.html" style="cursor:pointer; text-decoration:underline; color:inherit;">
-  Account Deletion
-</a>
 </div>
 
-<!-- MODAL -->
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>© offver technologies inc. 2026</div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;">
+      <a href="acceptable-use.html">acceptable use</a>
+      <a href="privacy.html">privacy policy</a>
+      <a href="terms-of-service.html">terms and conditions</a>
+      <a href="delete-account.html">account deletion</a>
+      
+    </div>
+  </div>
+</footer>
+
+<!-- WAITLIST MODAL -->
 <div class="modal-bg" id="modal" onclick="clickOutside(event)">
   <div class="modal-box" id="modalBox">
-
     <button class="close-btn" onclick="closeModal()">×</button>
 
     <h2>Join the waitlist</h2>
     <p>Be first in line as we launch a new era of off-market real estate private sales.</p>
 
     <form id="waitlistForm">
-
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_subject" value="New Waitlist Signup">
 
@@ -344,7 +1004,6 @@
 
       <button type="submit" class="submit-btn">Submit</button>
     </form>
-
   </div>
 </div>
 
@@ -373,14 +1032,185 @@
       headers: { "Accept": "application/json" }
     }).then(() => {
       document.getElementById("modalBox").innerHTML = `
+        <button class="close-btn" onclick="closeModal()">×</button>
         <h2>You're on the list! 🎉</h2>
         <p>Thank you for joining the offver waitlist.<br>We’ll be in touch soon.</p>
         <button class="submit-btn" onclick="closeModal()">Close</button>
       `;
     });
   });
+
+
+  // Hamburger toggle
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const headerEl = document.querySelector(".header");
+
+
+  // Sync header height (removes gap)
+  function syncHeaderHeight() {
+    if (!headerEl) return;
+    document.documentElement.style.setProperty(
+      "--header-h",
+      `${headerEl.offsetHeight}px`
+    );
+  }
+
+  window.addEventListener("load", syncHeaderHeight);
+  window.addEventListener("resize", syncHeaderHeight);
+  syncHeaderHeight();
+
+
+  hamburger.addEventListener("click", () => {
+
+    syncHeaderHeight(); // ensure perfect alignment
+
+    const isOpen = mobileMenu.classList.toggle("open");
+    hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    document.body.classList.toggle("menu-open", isOpen);
+  });
+
+
+  // Close menu when a link is clicked
+  mobileMenu.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => {
+      mobileMenu.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+    });
+  });
+
+// Close mobile menu if screen switches to desktop
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 900) {
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("menu-open");
+  }
+});
+
+  let currentPromoStep = 0;
+
+  const promoTitle = document.getElementById("promoTitle");
+  const promoLabel = document.getElementById("promoLabel");
+  const promoText = document.getElementById("promoText");
+  const promoStatement = document.getElementById("promoStatement");
+  const promoImage = document.getElementById("promoImage");
+  const promoDots = document.querySelectorAll(".promo-dot");
+  const promoPrev = document.getElementById("promoPrev");
+  const promoNext = document.getElementById("promoNext");
+  const promoCard = document.getElementById("offMarketCarousel");
+  const promoArrow = document.getElementById("promoArrow");
+
+  function renderPromoStep(index){
+    const step = promoSteps[index];
+
+    promoTitle.style.opacity = "0";
+    promoText.style.opacity = "0";
+    promoStatement.style.opacity = "0";
+    promoImage.style.opacity = "0";
+
+    setTimeout(() => {
+      promoTitle.textContent = step.title;
+      
+      promoText.textContent = " " + step.text;
+      promoStatement.textContent = step.statement;
+      promoImage.src = step.image;
+      promoImage.alt = step.alt;
+
+      promoDots.forEach(dot => dot.classList.remove("active"));
+      promoDots[index].classList.add("active");
+      promoLabel.textContent = step.label;
+      promoTitle.style.opacity = "1";
+      promoText.style.opacity = "1";
+      promoStatement.style.opacity = "1";
+      promoImage.style.opacity = "1";
+    }, 160);
+  }
+
+  function goToPromoStep(index){
+    currentPromoStep = index;
+    renderPromoStep(currentPromoStep);
+  }
+
+  function nextPromoStep(){
+    currentPromoStep = (currentPromoStep + 1) % promoSteps.length;
+    renderPromoStep(currentPromoStep);
+  }
+
+  function prevPromoStep(){
+    currentPromoStep = (currentPromoStep - 1 + promoSteps.length) % promoSteps.length;
+    renderPromoStep(currentPromoStep);
+  }
+
+  promoDots.forEach(dot => {
+    dot.addEventListener("click", (e) => {
+      e.stopPropagation();
+      goToPromoStep(Number(dot.dataset.step));
+    });
+  });
+
+  promoNext.addEventListener("click", (e) => {
+    e.stopPropagation();
+    nextPromoStep();
+  });
+
+  promoArrow.addEventListener("click", (e) => {
+  e.stopPropagation();
+  nextPromoStep();
+});
+
+  promoPrev.addEventListener("click", (e) => {
+    e.stopPropagation();
+    prevPromoStep();
+  });
+
+  // whole card clickable:
+  // click left half = previous, right half = next
+  promoCard.addEventListener("click", (e) => {
+    if (
+      e.target.closest(".promo-dot") ||
+      e.target.closest(".promo-zone")
+    ) return;
+
+    const rect = promoCard.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+
+    if (clickX < rect.width / 2) {
+      prevPromoStep();
+    } else {
+      nextPromoStep();
+    }
+  });
+
+  // swipe on mobile
+  let startX = 0;
+  let endX = 0;
+
+  promoCard.addEventListener("touchstart", (e) => {
+    startX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  promoCard.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe(){
+    const threshold = 40;
+    const diff = endX - startX;
+
+    if (Math.abs(diff) < threshold) return;
+
+    if (diff > 0) {
+      prevPromoStep();
+    } else {
+      nextPromoStep();
+    }
+  }
+
+  renderPromoStep(currentPromoStep);
 </script>
 
 </body>
 </html>
-
