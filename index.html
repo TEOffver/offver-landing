@@ -435,16 +435,17 @@ main{ padding:0; }
     inset 0 1px 0 rgba(255,255,255,.45);
 }
 
-/* Base buildings: 6 rows */
+/* Base buildings: 7 rows */
 .city-building::after{
   content:"";
   position:absolute;
   left:18px;
   right:18px;
   top:38px;
-  height:162px;
+  height:188px;
 
   background-image:
+    linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0),
     linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0),
     linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0),
     linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0),
@@ -460,7 +461,8 @@ main{ padding:0; }
     left 52px, right 52px,
     left 78px, right 78px,
     left 104px, right 104px,
-    left 130px, right 130px;
+    left 130px, right 130px,
+    left 156px, right 156px;
 
   background-repeat:no-repeat;
 
@@ -497,7 +499,8 @@ main{ padding:0; }
     linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0),
     linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0),
     linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0),
-    linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0);
+    linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0),
+    linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0),
     linear-gradient(#ffd2a6 0 0), linear-gradient(#ffd2a6 0 0);
 
   background-position:
@@ -509,6 +512,7 @@ main{ padding:0; }
   left 130px, right 130px,
   left 156px, right 156px,
   left 182px, right 182px;
+  left 208px, right 208px;
 }
 
 /* Slim towers: 6 rows, smaller windows */
@@ -518,7 +522,7 @@ main{ padding:0; }
   height:162px;
   background-size:13px 10px;
 }
-
+  
 .city-building::before{
   content:"";
   position:absolute;
