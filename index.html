@@ -515,12 +515,20 @@ main{ padding:0; }
   left 208px, right 208px;
 }
 
-/* Slim towers: 6 rows, smaller windows */
-.city-building:nth-child(5n)::after{
+.city-building:nth-child(6n)::after{
   left:16px;
   right:16px;
-  height:162px;
+  height:188px;
   background-size:13px 10px;
+
+  background-position:
+    left 0px, right 0px,
+    left 26px, right 26px,
+    left 52px, right 52px,
+    left 78px, right 78px,
+    left 104px, right 104px,
+    left 130px, right 130px,
+    left 156px, right 156px;
 }
   
 .city-building::before{
