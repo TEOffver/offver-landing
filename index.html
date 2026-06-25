@@ -735,8 +735,244 @@ main{ padding:0; }
     justify-content:flex-start;
     flex-wrap:wrap;
   }
+    
+}
+.why-simple{
+  padding:110px 0;
+  background:linear-gradient(180deg,#f5f0ec 0%, #fff7f1 100%);
+  text-align:center;
 }
 
+.why-simple-inner{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.why-simple h2{
+  font-size:80px;
+  line-height:1.05;
+  font-weight:800;
+  letter-spacing:-2px;
+  color:#111;
+  margin-bottom:28px;
+}
+
+.why-simple p{
+  font-size:26px;
+  line-height:1.45;
+  color:#333;
+  max-width:760px;
+  margin:0 auto;
+}
+
+.why-simple-line{
+  width:90px;
+  height:4px;
+  background:#ff6600;
+  border-radius:999px;
+  margin:38px auto 0;
+}
+
+@media (max-width:900px){
+  .why-simple{
+    padding:80px 0;
+  }
+
+  .why-simple h2{
+    font-size:38px;
+    letter-spacing:-1px;
+  }
+
+  .why-simple p{
+    font-size:21px;
+  }
+}
+
+.how-it-works{
+  padding:70px 0 100px;
+  background:linear-gradient(180deg,#f5f0ec 0%, #fff7f1 100%);
+}
+
+.how-pill{
+  width:max-content;
+  margin:0 auto 34px;
+  padding:14px 28px 14px 18px;
+  border-radius:999px;
+  background:#fff;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:3px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.how-pill .how-arrow{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#ffc66d,#ff5a1f);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  line-height:1;
+}
+
+.how-grid{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.how-card{
+  width:100%;
+  min-height:190px;
+  background:rgba(255,255,255,.85);
+  border-radius:28px;
+  padding:46px 60px;
+
+  display:grid;
+  grid-template-columns:140px 1px 1fr;
+  gap:40px;
+  align-items:center;
+
+  border:1px solid rgba(0,0,0,.05);
+  box-shadow:0 12px 35px rgba(0,0,0,.06);
+}
+
+  .how-card{
+  max-width:900px;
+}
+
+.how-card:nth-child(even){
+  margin-left:200px;
+}
+
+.how-num{
+  font-size:78px;
+  font-weight:800;
+  line-height:1;
+  color:#ff5a1f;
+  letter-spacing:-4px;
+}
+
+.how-divider{
+  width:1px;
+  height:120px;
+  background:#ffd9c8;
+}
+
+.how-card h3{
+  font-size:60px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:-1.5px;
+  margin-bottom:18px;
+}
+
+.how-card:nth-child(3) h3{
+  color:#ff6600;
+}
+
+.how-card p{
+  font-size:21px;
+  line-height:1.55;
+  color:#111;
+  max-width:700px;
+}
+
+.how-card{
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease,
+    background .25s ease;
+  cursor:pointer;
+}
+
+.how-card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 24px 60px rgba(0,0,0,.12);
+  border-color:rgba(255,102,0,.35);
+  background:#fff;
+}
+
+.how-card:hover .how-num{
+  transform:scale(1.08);
+  color:#ff6600;
+}
+
+.how-card:hover .how-divider{
+  background:#ff6600;
+}
+
+.how-num,
+.how-card h3,
+.how-divider{
+  transition:.25s ease;
+}
+
+.how-cta{
+  text-align:center;
+  margin-top:90px;
+}
+
+.how-cta h2{
+  font-size:80px;
+  line-height:1.1;
+  font-weight:800;
+  letter-spacing:-2px;
+  margin-bottom:32px;
+  color:#111;
+}
+
+.how-cta .btn{
+  padding:16px 32px;
+  font-size:18px;
+}
+
+@media (max-width:900px){
+
+  .how-cta{
+    margin-top:60px;
+  }
+
+  .how-cta h2{
+    font-size:34px;
+    letter-spacing:-1px;
+  }
+
+}
+
+@media (max-width:900px){
+  .how-grid{
+    grid-template-columns:1fr;
+  }
+
+  .how-card,
+  .how-card:nth-child(even){
+   max-width:100%;
+    width:100%;
+    margin-left:0;
+    grid-template-columns:90px 1px 1fr;
+    gap:24px;
+    padding:32px 26px;
+  }
+
+  .how-num{
+    font-size:52px;
+  }
+
+  .how-card h3{
+    font-size:32px;
+  }
+
+  .how-card p{
+    font-size:18px;
+  }
+}
 
 /* FOOTER — WHITE WITH DIVIDER */
 .footer{
@@ -1050,10 +1286,76 @@ main{ padding:0; }
       </div>
     </div>
 
+<section class="why-simple">
+  <div class="container">
+    <div class="why-simple-inner">
+      <h2>Why digitize off-market property discovery?</h2>
+      <p>Because buyers and sellers should have a digital way to connect at the earliest stage of their journey.</p>
+      <div class="why-simple-line"></div>
+    </div>
   </div>
+</section>
 
+<section class="how-it-works">
+  <div class="container">
+
+    <div class="how-pill">
+      <span class="how-arrow">👇</span>
+      HOW IT WORKS
+    </div>
+
+    <div class="how-grid">
+
+      <div class="how-card">
+        <div class="how-num">1.</div>
+        <div class="how-divider"></div>
+        <div>
+          <h3>browse.</h3>
+          <p>View home buying and selling intent. Verify when you're ready to connect.</p>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <div class="how-num">2.</div>
+        <div class="how-divider"></div>
+        <div>
+          <h3>verify.</h3>
+          <p>To create a secure marketplace, all prospective buyers and sellers must verify before they can advertise or message.</p>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <div class="how-num">3.</div>
+        <div class="how-divider"></div>
+        <div>
+          <h3>connect.</h3>
+          <p>Once verified, you can advertise your intent to buy or sell a home and message other verified users.</p>
+        </div>
+      </div>
+
+      <div class="how-card">
+        <div class="how-num">4.</div>
+        <div class="how-divider"></div>
+        <div>
+          <h3>contract.</h3>
+          <p>If you've found your home and are ready to make an offer to purchase, connect with a lawyer, notary, or realtor to prepare a flat-fee contract.</p>
+        </div>
+      </div>
+
+    </div>
+
+      <div class="how-cta">
+  <h2>
+    The world went digital.<br>
+    off-market did too.
+  </h2>
+
+  <button class="btn" onclick="openModal()">
+    join waitlist
+  </button>
 </div>
 
+  </div>
 </section>
 
 </main>
