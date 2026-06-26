@@ -1170,14 +1170,20 @@ main{ padding:0; }
   
 @media (max-width:900px){
 
-    .hero-copy{
-    transform:translateY(-140px);
+  .hero-content{
+    min-height:calc(100svh - var(--header-h));
+    align-items:flex-start;
+    padding-top:35px;
+  }
+
+  .hero-copy{
+    transform:none;
     max-width:380px;
     padding:0 16px;
   }
 
   .hero-copy h1{
-    font-size:55px;
+    font-size:60px;
     line-height:.95;
     letter-spacing:-2px;
   }
@@ -1187,6 +1193,7 @@ main{ padding:0; }
     line-height:1.45;
     max-width:300px;
   }
+
 }
 
 </style>
