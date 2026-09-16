@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Professionals — offver</title>
+    <link rel="icon" href="favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="offver-professional.css" />
+    <style>
+      .professional-types {
+        padding: 25px 0;
+        background: #f7f7f5;
+      }
+
+      .professional-types-layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.75fr);
+        gap: 22px;
+        align-items: stretch;
+      }
+
+      .professional-types-intro {
+        min-height: 500px;
+        padding: 42px;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        background: #1a1a1a;
+        color: #ffffff;
+      }
+
+      .professional-types-eyebrow {
+        margin-bottom: 24px;
+        font-size: 13px;
+        line-height: 1;
+        font-weight: 800;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #1a1a1a;
+      }
+
+      .professional-types-intro h2 {
+        max-width: 420px;
+        margin: 0;
+        font-size: clamp(38px, 3.4vw, 58px);
+        line-height: 0.95;
+        letter-spacing: -0.055em;
+        color: #ffffff;
+      }
+
+      .professional-types-intro p {
+        max-width: 380px;
+        margin: 30px 0 34px;
+        font-size: 19px;
+        line-height: 1.45;
+        color: rgba(255, 255, 255, 0.94);
+      }
+
+      .professional-types-cta {
+        min-height: 58px;
+        padding: 0 25px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        background: #f7f7f5;
+        color: #000000;
+        font-size: 15px;
+        font-weight: 700;
+        text-decoration: none;
+        transition:
+          transform 160ms ease,
+          background 160ms ease;
+      }
+
+      .professional-types-cta:hover {
+        transform: translateY(-2px);
+        background: #ff6600;
+      }
+
+      .professional-types-cta span {
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .professional-type-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-width: 0;
+      }
+
+      .professional-type-cards {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 16px;
+        align-content: center;
+      }
+
+      .professional-type-card {
+        grid-column: span 3;
+        min-height: 290px;
+        padding: 30px 20px 26px;
+        border: 1px solid #e4e4e1;
+        border-radius: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: #ffffff;
+        box-shadow: 0 12px 34px rgba(26, 26, 26, 0.045);
+        transition:
+          transform 160ms ease,
+          box-shadow 160ms ease;
+      }
+
+      .professional-type-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 38px rgba(26, 26, 26, 0.08);
+      }
+
+      .professional-type-card:nth-child(n + 5) {
+        grid-column: span 4;
+        min-height: 240px;
+      }
+
+      .professional-type-emoji {
+        height: 92px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 68px;
+        line-height: 1;
+      }
+
+      .professional-type-card:nth-child(n + 5) .professional-type-emoji {
+        height: 80px;
+        font-size: 60px;
+      }
+
+      .professional-type-card h3 {
+        margin: 15px 0 10px;
+        font-size: 25px;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        color: #1a1a1a;
+      }
+
+      .professional-type-card p {
+        max-width: 240px;
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.45;
+        color: #6e6e73;
+      }
+
+      @media (max-width: 1050px) {
+        .professional-types-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .professional-types-intro {
+          min-height: auto;
+        }
+
+        .professional-types-intro h2 {
+          max-width: 680px;
+        }
+
+        .professional-type-card,
+        .professional-type-card:nth-child(n + 5) {
+          grid-column: span 6;
+          min-height: 250px;
+        }
+
+        .professional-type-card:last-child {
+          grid-column: 4 / span 6;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .professional-types {
+          padding: 64px 0;
+        }
+
+        .professional-types-intro {
+          padding: 38px 27px 30px;
+          border-radius: 24px;
+        }
+
+        .professional-types-intro h2 {
+          font-size: 46px;
+        }
+
+        .professional-types-intro p {
+          font-size: 17px;
+        }
+
+        .professional-type-cards {
+          gap: 12px;
+        }
+
+        .professional-type-card,
+        .professional-type-card:nth-child(n + 5),
+        .professional-type-card:last-child {
+          grid-column: span 6;
+          min-height: 205px;
+          padding: 22px 12px;
+          border-radius: 20px;
+        }
+
+        .professional-type-card:last-child {
+          grid-column: 4 / span 6;
+        }
+
+        .professional-type-emoji,
+        .professional-type-card:nth-child(n + 5) .professional-type-emoji {
+          height: 62px;
+          font-size: 48px;
+        }
+
+        .professional-type-card h3 {
+          margin-top: 11px;
+          font-size: 19px;
+        }
+
+        .professional-type-card p {
+          font-size: 12px;
+          line-height: 1.35;
+        }
+      }
+
+      @media (max-width: 390px) {
+        .professional-type-card,
+        .professional-type-card:nth-child(n + 5),
+        .professional-type-card:last-child {
+          grid-column: 1 / -1;
+          min-height: 190px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">off<b>ver</b></a>
+        <nav class="nav">
+          <a href="buyer.html">buyer</a><a href="seller.html">seller</a
+          ><a class="active" href="professional.html">professional</a
+          ><a href="about.html">about</a>
+        </nav>
+        <a class="btn" href="professional-signup.html">sign up</a>
+      </div>
+    </header>
+    <main>
+      <section
+        class="professional-types"
+        aria-labelledby="professional-types-title"
+      >
+        <div class="container professional-types-layout">
+          <div class="professional-types-intro">
+            <h2 id="professional-types-title">
+              Grow your business with offver.
+            </h2>
+            <p>
+              Connect with buyers and sellers at the earliest stage of their
+              journey. <span style="color: #ff954e">Beta is free!</span>
+            </p>
+            <a class="professional-types-cta" href="professional-signup.html">
+              Join as a professional <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="professional-type-column">
+            <div class="professional-types-eyebrow">Who can join</div>
+            <div class="professional-type-cards">
+              <article class="professional-type-card">
+                <div class="professional-type-emoji" aria-hidden="true">🏦</div>
+                <h3>Mortgage</h3>
+                <p>Professionals, brokerages, banks and lenders</p>
+              </article>
+
+              <article class="professional-type-card">
+                <div class="professional-type-emoji" aria-hidden="true">📄</div>
+                <h3>Contracts</h3>
+                <p>Lawyers, notaries and Realtors</p>
+              </article>
+
+              <article class="professional-type-card">
+                <div class="professional-type-emoji" aria-hidden="true">🛡️</div>
+                <h3>Insurance</h3>
+                <p>Professionals, brokerages and banks</p>
+              </article>
+
+              <article class="professional-type-card">
+                <div class="professional-type-emoji" aria-hidden="true">🔍</div>
+                <h3>Inspectors</h3>
+                <p>Home inspectors</p>
+              </article>
+
+              <article class="professional-type-card">
+                <div class="professional-type-emoji" aria-hidden="true">🛠️</div>
+                <h3>Home Services</h3>
+                <p>Contractors, designers and locksmiths</p>
+              </article>
+
+              <article class="professional-type-card">
+                <div class="professional-type-emoji" aria-hidden="true">🚚</div>
+                <h3>Movers</h3>
+                <p>Moving professionals</p>
+              </article>
+
+              <article class="professional-type-card">
+                <div class="professional-type-emoji" aria-hidden="true">🧹</div>
+                <h3>Cleaners</h3>
+                <p>Cleaning professionals</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>© offver technologies inc. 2026</div>
+        <div class="footer-links">
+          <a href="acceptable-use.html">acceptable use</a
+          ><a href="privacy.html">privacy policy</a
+          ><a href="terms-of-service.html">terms and conditions</a
+          ><a href="delete-account.html">account deletion</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

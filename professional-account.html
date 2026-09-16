@@ -1,0 +1,1510 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Professional account — offver</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="offver-professional.css" />
+    <style>
+      .terms a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .profile-section {
+        margin-top: 24px;
+      }
+      .profile-section h3 {
+        margin: 0 0 8px;
+      }
+      .profile-section .helper {
+        margin-bottom: 14px;
+      }
+      .field-suffix {
+        position: relative;
+      }
+      .field-suffix input {
+        padding-right: 58px;
+      }
+      .field-suffix span {
+        position: absolute;
+        right: 18px;
+        bottom: 15px;
+        color: #6e6e73;
+        font-weight: 700;
+      }
+      .field-prefix {
+        position: relative;
+      }
+      .field-prefix input {
+        padding-left: 38px;
+      }
+      .field-prefix span {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        z-index: 1;
+        color: #6e6e73;
+        font-weight: 700;
+        transform: translateY(-50%);
+      }
+      input[type="number"] {
+        appearance: textfield;
+        -moz-appearance: textfield;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        margin: 0;
+        -webkit-appearance: none;
+      }
+      .identity-summary {
+        margin-bottom: 24px;
+      }
+      .identity-summary div {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 9px 0;
+        border-bottom: 1px solid #e8e8e8;
+      }
+      .identity-summary span {
+        color: #6e6e73;
+      }
+      .image-upload {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .image-crop-wrap {
+        flex: 0 0 auto;
+      }
+      .image-preview {
+        width: 180px;
+        height: 180px;
+        display: block;
+        border-radius: 50%;
+        border: 2px solid #dedede;
+        background: #f7f7f5;
+        cursor: grab;
+        touch-action: none;
+      }
+      .image-preview.dragging {
+        cursor: grabbing;
+      }
+      .image-upload-copy {
+        flex: 1;
+      }
+      .image-upload-copy input {
+        width: 100%;
+      }
+      .image-note {
+        display: block;
+        margin-top: 8px;
+        color: #6e6e73;
+        font-size: 14px;
+      }
+      .crop-controls {
+        margin-top: 16px;
+      }
+      .crop-controls label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .crop-controls input {
+        width: 100%;
+      }
+      .form-section {
+        margin-top: 30px;
+      }
+      .form-section-highlight {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding: 24px 20px;
+        border: 1px solid #ffe2cf;
+        border-radius: 22px;
+        background: #fff9f5;
+      }
+      .form-section-label {
+        margin: 0 0 20px;
+        color: #ff6600;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .form-divider {
+        height: 1px;
+        margin: 32px 0;
+        background: #e8e8e8;
+      }
+      #verificationForm .form-section-highlight .choice.selected {
+        border-color: #ff6600;
+        background: #ff6600;
+        color: #fff;
+      }
+      #verificationForm .field-grid {
+        margin-top: 0;
+      }
+      .leads-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .lead-count {
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: #fff0e6;
+        color: #c94f00;
+        font-size: 13px;
+        font-weight: 800;
+      }
+      .lead-list {
+        display: grid;
+        gap: 16px;
+        margin-top: 22px;
+      }
+      .lead-card {
+        padding: 20px;
+        border: 1px solid #e8e8e8;
+        border-radius: 20px;
+        background: #fff;
+      }
+      .lead-card.unread {
+        border-color: #ff6600;
+        box-shadow: 0 8px 24px rgba(255, 102, 0, 0.08);
+      }
+      .lead-card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .lead-card h3 {
+        margin: 0;
+      }
+      .lead-date {
+        color: #6e6e73;
+        font-size: 13px;
+      }
+      .lead-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px 24px;
+        margin-top: 18px;
+      }
+      .lead-row {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .lead-row span {
+        color: #6e6e73;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .lead-row strong {
+        overflow-wrap: anywhere;
+      }
+      .lead-action {
+        margin-top: 18px;
+      }
+      .empty-leads {
+        margin: 0;
+        color: #6e6e73;
+      }
+      @media (max-width: 640px) {
+        .image-upload {
+          align-items: stretch;
+          flex-direction: column;
+        }
+        .image-crop-wrap {
+          align-self: center;
+        }
+      }
+      @media (max-width: 640px) {
+        .lead-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">off<b>ver</b></a>
+        <button class="btn secondary" id="signOutButton" type="button">
+          sign out
+        </button>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="container narrow">
+        <div class="page-title">
+          <h1>Your professional account</h1>
+          <p>Complete verification and build your offver profile.</p>
+        </div>
+
+        <div class="status">
+          <div>
+            <strong id="statusTitle">Loading account…</strong>
+            <div id="statusCopy"></div>
+          </div>
+          <span class="pill" id="statusPill">LOADING</span>
+        </div>
+
+        <form class="card hidden" id="verificationForm">
+          <h2>Professional verification</h2>
+          <p class="helper">
+            Tell us about your professional experience. Once submitted, your
+            application will be reviewed by offver.
+          </p>
+
+          <section class="form-section form-section-highlight">
+            <div class="form-section-label">01 — Professional information</div>
+
+            <div class="field full">
+              <label>Professional category</label>
+              <div class="button-grid" id="categoryButtons">
+                <button type="button" class="choice" data-category="mortgage">
+                  Mortgage
+                </button>
+                <button type="button" class="choice" data-category="contracts">
+                  Contracts
+                </button>
+                <button type="button" class="choice" data-category="insurance">
+                  Insurance
+                </button>
+                <button type="button" class="choice" data-category="inspectors">
+                  Inspectors
+                </button>
+                <button
+                  type="button"
+                  class="choice"
+                  data-category="home-services"
+                >
+                  Home Services
+                </button>
+                <button type="button" class="choice" data-category="movers">
+                  Movers
+                </button>
+                <button type="button" class="choice" data-category="cleaners">
+                  Cleaners
+                </button>
+              </div>
+            </div>
+
+            <div
+              id="typeArea"
+              class="field full hidden"
+              style="margin-top: 22px"
+            >
+              <label>Professional type</label>
+              <div class="button-grid" id="typeButtons"></div>
+            </div>
+          </section>
+
+          <div class="form-divider"></div>
+
+          <section class="form-section">
+            <div class="form-section-label">
+              02 — Contact and verification details
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="firstName">First name</label>
+                <input
+                  id="firstName"
+                  type="text"
+                  autocomplete="given-name"
+                  required
+                />
+              </div>
+              <div class="field">
+                <label for="lastName">Last name</label>
+                <input
+                  id="lastName"
+                  type="text"
+                  autocomplete="family-name"
+                  required
+                />
+              </div>
+              <div class="field full">
+                <label for="phone">Phone number</label>
+                <input id="phone" type="tel" autocomplete="tel" required />
+              </div>
+              <div class="field full">
+                <label for="businessName"
+                  >Business, company or brokerage name</label
+                >
+                <input
+                  id="businessName"
+                  type="text"
+                  autocomplete="organization"
+                  required
+                />
+              </div>
+              <div class="field full hidden" id="brokerageArea">
+                <label for="brokerageName">Brokerage name, if different</label>
+                <input
+                  id="brokerageName"
+                  type="text"
+                  autocomplete="organization"
+                />
+              </div>
+              <div class="field full hidden" id="licenceArea">
+                <label for="licenceNumber"
+                  >Licence or registration number</label
+                >
+                <input id="licenceNumber" type="text" />
+              </div>
+            </div>
+          </section>
+
+          <div class="form-divider"></div>
+
+          <section class="form-section">
+            <div class="form-section-label">03 — Consent and submission</div>
+
+            <label class="terms">
+              <input id="professionalTerms" type="checkbox" required />
+              <span
+                >I agree to the
+                <a href="professional-terms.html">professional terms</a> and
+                consent to offver verifying the information provided.</span
+              >
+            </label>
+
+            <button class="btn wide" id="verificationButton" type="submit">
+              Submit for Verification
+            </button>
+            <div
+              class="message"
+              id="verificationMessage"
+              aria-live="polite"
+            ></div>
+          </section>
+        </form>
+
+        <form class="card hidden" id="profileForm">
+          <h2>Build your private profile</h2>
+          <p class="helper">
+            You can prepare your profile now. It will not become public until
+            offver approves your application.
+          </p>
+
+          <div class="identity-summary" id="identitySummary"></div>
+
+          <div class="field-grid">
+            <div class="field full">
+              <label for="profileImage">Profile picture or company logo</label>
+              <div class="image-upload">
+                <div class="image-crop-wrap">
+                  <canvas
+                    class="image-preview"
+                    id="profileImagePreview"
+                    width="600"
+                    height="600"
+                    aria-label="Profile image crop preview"
+                  ></canvas>
+                </div>
+                <div class="image-upload-copy">
+                  <input
+                    id="profileImage"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                  />
+                  <span class="image-note"
+                    >JPG, PNG or WebP. Maximum file size: 5 MB.</span
+                  >
+                  <span class="image-note"
+                    >After choosing a picture, drag it in the circle to
+                    reposition it.</span
+                  >
+                  <div class="crop-controls hidden" id="cropControls">
+                    <label for="cropZoom"
+                      ><span>Zoom</span
+                      ><span id="cropZoomValue">0%</span></label
+                    >
+                    <input
+                      id="cropZoom"
+                      type="range"
+                      min="0"
+                      max="100"
+                      value="0"
+                      step="1"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field full">
+              <label for="bio">Biography</label>
+              <textarea id="bio" required></textarea>
+            </div>
+            <div class="field full">
+              <label for="googleUrl">Google Business Profile link</label>
+              <input id="googleUrl" type="url" />
+            </div>
+            <div class="field">
+              <label for="experience">Years of experience</label>
+              <input
+                id="experience"
+                type="number"
+                min="0"
+                max="80"
+                value="0"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="serviceArea">Service area</label>
+              <input
+                id="serviceArea"
+                type="text"
+                placeholder="Vancouver, BC"
+                required
+              />
+            </div>
+          </div>
+
+          <section class="profile-section">
+            <h3>Services and specialties</h3>
+            <p class="helper">Select all that apply.</p>
+            <div class="button-grid" id="specialtyButtons"></div>
+          </section>
+
+          <section class="profile-section hidden" id="mortgageFields">
+            <h3>Featured mortgage rate</h3>
+            <div class="field-grid">
+              <div class="field">
+                <label for="rateTermYears">Term</label>
+                <select id="rateTermYears">
+                  <option value="">Select term</option>
+                  <option value="1">1 year</option>
+                  <option value="2">2 years</option>
+                  <option value="3">3 years</option>
+                  <option value="4">4 years</option>
+                  <option value="5">5 years</option>
+                  <option value="6">6 years</option>
+                  <option value="7">7 years</option>
+                  <option value="8">8 years</option>
+                  <option value="9">9 years</option>
+                  <option value="10">10 years</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="rateType">Rate type</label>
+                <select id="rateType">
+                  <option value="">Select type</option>
+                  <option value="fixed">Fixed</option>
+                  <option value="variable">Variable</option>
+                </select>
+              </div>
+              <div class="field full field-suffix">
+                <label for="featuredRate">Rate</label>
+                <input
+                  id="featuredRate"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  value="0"
+                />
+                <span>%</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="profile-section hidden" id="contractFields">
+            <h3>Flat fee contracts</h3>
+            <div class="field full">
+              <label for="flatFee">Flat fee</label>
+              <div class="field-prefix">
+                <span>$</span
+                ><input
+                  id="flatFee"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="0"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section class="profile-section hidden" id="inspectorFields">
+            <h3>Inspection pricing</h3>
+            <div class="field-grid">
+              <div class="field">
+                <label for="housePrice">House inspection</label>
+                <div class="field-prefix">
+                  <span>$</span
+                  ><input
+                    id="housePrice"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label for="condoPrice">Condo inspection</label>
+                <div class="field-prefix">
+                  <span>$</span
+                  ><input
+                    id="condoPrice"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
+                  />
+                </div>
+              </div>
+              <div class="field full">
+                <label for="townhouseDuplexPrice"
+                  >Townhouse or duplex inspection</label
+                >
+                <div class="field-prefix">
+                  <span>$</span
+                  ><input
+                    id="townhouseDuplexPrice"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="profile-section hidden" id="hourlyFields">
+            <h3>Hourly pricing</h3>
+            <div class="field full">
+              <label for="hourlyRate">Hourly rate</label>
+              <div class="field-prefix">
+                <span>$</span
+                ><input
+                  id="hourlyRate"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="0"
+                />
+              </div>
+            </div>
+          </section>
+
+          <button
+            class="btn wide"
+            id="profileButton"
+            type="submit"
+            style="margin-top: 26px"
+          >
+            Save Private Profile
+          </button>
+          <div class="message" id="profileMessage" aria-live="polite"></div>
+
+          <div class="lock-grid">
+            <div class="lock">
+              <strong>Verified badge</strong
+              ><span id="badgeState">Locked until approval</span>
+            </div>
+            <div class="lock">
+              <strong>Messaging and leads</strong
+              ><span id="leadsState">Locked until approval</span>
+            </div>
+          </div>
+        </form>
+
+        <section class="card hidden" id="mortgageLeadsSection">
+          <div class="leads-header">
+            <div>
+              <h2>Pre-approval leads</h2>
+              <p class="helper">
+                Buyers who selected you for mortgage pre-approval appear here.
+              </p>
+            </div>
+            <span class="lead-count" id="mortgageLeadCount">0 new</span>
+          </div>
+          <div
+            class="message"
+            id="mortgageLeadsMessage"
+            aria-live="polite"
+          ></div>
+          <div class="lead-list" id="mortgageLeadList"></div>
+        </section>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="offver-professional.js"></script>
+    <script>
+      const byId = (id) => document.getElementById(id);
+      const statusTitle = byId("statusTitle");
+      const statusCopy = byId("statusCopy");
+      const statusPill = byId("statusPill");
+      const verificationForm = byId("verificationForm");
+      const profileForm = byId("profileForm");
+      const categoryButtons = byId("categoryButtons");
+      const typeArea = byId("typeArea");
+      const typeButtons = byId("typeButtons");
+      const firstNameInput = byId("firstName");
+      const lastNameInput = byId("lastName");
+      const phoneInput = byId("phone");
+      const businessNameInput = byId("businessName");
+      const brokerageArea = byId("brokerageArea");
+      const brokerageNameInput = byId("brokerageName");
+      const licenceArea = byId("licenceArea");
+      const licenceNumberInput = byId("licenceNumber");
+      const professionalTermsInput = byId("professionalTerms");
+      const verificationButton = byId("verificationButton");
+      const verificationMessage = byId("verificationMessage");
+      const identitySummary = byId("identitySummary");
+      const profileImageInput = byId("profileImage");
+      const profileImagePreview = byId("profileImagePreview");
+      const cropControls = byId("cropControls");
+      const cropZoomInput = byId("cropZoom");
+      const cropZoomValue = byId("cropZoomValue");
+      const bioInput = byId("bio");
+      const googleUrlInput = byId("googleUrl");
+      const experienceInput = byId("experience");
+      const serviceAreaInput = byId("serviceArea");
+      const specialtyButtons = byId("specialtyButtons");
+      const mortgageFields = byId("mortgageFields");
+      const contractFields = byId("contractFields");
+      const inspectorFields = byId("inspectorFields");
+      const hourlyFields = byId("hourlyFields");
+      const rateTermYearsInput = byId("rateTermYears");
+      const rateTypeInput = byId("rateType");
+      const featuredRateInput = byId("featuredRate");
+      const flatFeeInput = byId("flatFee");
+      const housePriceInput = byId("housePrice");
+      const condoPriceInput = byId("condoPrice");
+      const townhouseDuplexPriceInput = byId("townhouseDuplexPrice");
+      const hourlyRateInput = byId("hourlyRate");
+      const profileButton = byId("profileButton");
+      const profileMessage = byId("profileMessage");
+      const badgeState = byId("badgeState");
+      const leadsState = byId("leadsState");
+      const signOutButton = byId("signOutButton");
+      const mortgageLeadsSection = byId("mortgageLeadsSection");
+      const mortgageLeadCount = byId("mortgageLeadCount");
+      const mortgageLeadList = byId("mortgageLeadList");
+      const mortgageLeadsMessage = byId("mortgageLeadsMessage");
+
+      document.querySelectorAll('input[type="number"]').forEach((input) => {
+        input.addEventListener("focus", () => input.select());
+      });
+
+      let session = null;
+      let application = null;
+      let category = "";
+      let professionalType = "";
+      let selectedSpecialties = new Set();
+      let existingPhotoUrl = null;
+      let previewObjectUrl = null;
+      let cropImage = null;
+      let cropZoom = 1;
+      let cropOffsetX = 0;
+      let cropOffsetY = 0;
+      let cropDragging = false;
+      let cropPointerX = 0;
+      let cropPointerY = 0;
+
+      const professionalTypes = {
+        mortgage: ["Individual Professional", "Brokerage", "Bank or Lender"],
+        contracts: ["Lawyer", "Notary", "Realtor"],
+        insurance: ["Individual Professional", "Brokerage", "Bank"],
+        "home-services": ["Contractor", "Interior Designer", "Locksmith"],
+      };
+
+      const specialtyOptions = {
+        mortgage: [
+          "First-Time Buyers",
+          "Self-Employed",
+          "Refinancing",
+          "Renewals",
+          "Investment Properties",
+        ],
+        contracts: [
+          "Purchase Contracts",
+          "Sale Contracts",
+          "Residential Real Estate",
+        ],
+        insurance: [
+          "Condo Insurance",
+          "Residential Insurance",
+          "Tenant Insurance",
+        ],
+        inspectors: [
+          "Residential Inspections",
+          "Condo Inspections",
+          "Townhouse and Duplex Inspections",
+        ],
+        movers: [
+          "Residential Moves",
+          "Local Moves",
+          "Long-Distance Moves",
+          "Packing Services",
+        ],
+        cleaners: [
+          "Residential Cleaning",
+          "Move-In Cleaning",
+          "Move-Out Cleaning",
+          "Deep Cleaning",
+        ],
+        "home-services": [
+          "Renovations",
+          "Repairs",
+          "Interior Design",
+          "Locksmith Services",
+        ],
+      };
+
+      const licensedTypes = new Set([
+        "mortgage:Individual Professional",
+        "mortgage:Brokerage",
+        "mortgage:Bank or Lender",
+        "contracts:Lawyer",
+        "contracts:Notary",
+        "contracts:Realtor",
+        "insurance:Individual Professional",
+        "insurance:Brokerage",
+        "insurance:Bank",
+        "inspectors:inspectors",
+      ]);
+
+      const brokerageTypes = new Set([
+        "mortgage:Individual Professional",
+        "contracts:Realtor",
+        "insurance:Individual Professional",
+      ]);
+
+      function displayMessage(element, message) {
+        element.textContent = message;
+        element.style.display = "block";
+      }
+
+      function clearPageMessage(element) {
+        element.textContent = "";
+        element.style.display = "none";
+      }
+
+      function setAccountError(message) {
+        statusTitle.textContent = "We could not load your account";
+        statusCopy.textContent = message;
+        statusPill.textContent = "ERROR";
+      }
+
+      function constrainCropOffset() {
+        if (!cropImage) return;
+        const canvas = profileImagePreview;
+        const baseScale = Math.max(
+          canvas.width / cropImage.naturalWidth,
+          canvas.height / cropImage.naturalHeight,
+        );
+        const displayedWidth = cropImage.naturalWidth * baseScale * cropZoom;
+        const displayedHeight = cropImage.naturalHeight * baseScale * cropZoom;
+        const maxX = Math.max(0, (displayedWidth - canvas.width) / 2);
+        const maxY = Math.max(0, (displayedHeight - canvas.height) / 2);
+        cropOffsetX = Math.max(-maxX, Math.min(maxX, cropOffsetX));
+        cropOffsetY = Math.max(-maxY, Math.min(maxY, cropOffsetY));
+      }
+
+      function drawCropPreview() {
+        const canvas = profileImagePreview;
+        const context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = "#f7f7f5";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        if (!cropImage) return;
+        constrainCropOffset();
+        const baseScale = Math.max(
+          canvas.width / cropImage.naturalWidth,
+          canvas.height / cropImage.naturalHeight,
+        );
+        const width = cropImage.naturalWidth * baseScale * cropZoom;
+        const height = cropImage.naturalHeight * baseScale * cropZoom;
+        context.save();
+        context.beginPath();
+        context.arc(
+          canvas.width / 2,
+          canvas.height / 2,
+          canvas.width / 2,
+          0,
+          Math.PI * 2,
+        );
+        context.clip();
+        context.drawImage(
+          cropImage,
+          (canvas.width - width) / 2 + cropOffsetX,
+          (canvas.height - height) / 2 + cropOffsetY,
+          width,
+          height,
+        );
+        context.restore();
+      }
+
+      function loadCropImage(url, editable) {
+        if (!url) {
+          cropImage = null;
+          cropControls.classList.add("hidden");
+          drawCropPreview();
+          return;
+        }
+        const image = new Image();
+        image.crossOrigin = "anonymous";
+        image.onload = () => {
+          cropImage = image;
+          cropZoom = 1;
+          cropOffsetX = 0;
+          cropOffsetY = 0;
+          cropZoomInput.value = "0";
+          cropZoomValue.textContent = "0%";
+          cropControls.classList.toggle("hidden", !editable);
+          drawCropPreview();
+        };
+        image.onerror = () =>
+          displayMessage(profileMessage, "We could not preview that image.");
+        image.src = url;
+      }
+
+      profileImageInput.addEventListener("change", () => {
+        const file = profileImageInput.files[0];
+        clearPageMessage(profileMessage);
+        if (!file) {
+          loadCropImage(existingPhotoUrl, false);
+          return;
+        }
+        if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+          profileImageInput.value = "";
+          displayMessage(profileMessage, "Choose a JPG, PNG or WebP image.");
+          loadCropImage(existingPhotoUrl, false);
+          return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          profileImageInput.value = "";
+          displayMessage(profileMessage, "Choose an image smaller than 5 MB.");
+          loadCropImage(existingPhotoUrl, false);
+          return;
+        }
+        if (previewObjectUrl) URL.revokeObjectURL(previewObjectUrl);
+        previewObjectUrl = URL.createObjectURL(file);
+        loadCropImage(previewObjectUrl, true);
+      });
+
+      cropZoomInput.addEventListener("input", () => {
+        const visibleZoom = Number(cropZoomInput.value);
+        cropZoom = 1 + (visibleZoom / 100) * 2;
+        cropZoomValue.textContent = `${visibleZoom}%`;
+        drawCropPreview();
+      });
+
+      profileImagePreview.addEventListener("pointerdown", (event) => {
+        if (!profileImageInput.files[0] || !cropImage) return;
+        cropDragging = true;
+        cropPointerX = event.clientX;
+        cropPointerY = event.clientY;
+        profileImagePreview.classList.add("dragging");
+        profileImagePreview.setPointerCapture(event.pointerId);
+      });
+
+      profileImagePreview.addEventListener("pointermove", (event) => {
+        if (!cropDragging) return;
+        const rect = profileImagePreview.getBoundingClientRect();
+        const scale = profileImagePreview.width / rect.width;
+        cropOffsetX += (event.clientX - cropPointerX) * scale;
+        cropOffsetY += (event.clientY - cropPointerY) * scale;
+        cropPointerX = event.clientX;
+        cropPointerY = event.clientY;
+        drawCropPreview();
+      });
+
+      function stopCropDragging() {
+        cropDragging = false;
+        profileImagePreview.classList.remove("dragging");
+      }
+
+      profileImagePreview.addEventListener("pointerup", stopCropDragging);
+      profileImagePreview.addEventListener("pointercancel", stopCropDragging);
+
+      function createCroppedImageBlob() {
+        return new Promise((resolve, reject) => {
+          profileImagePreview.toBlob(
+            (blob) =>
+              blob
+                ? resolve(blob)
+                : reject(new Error("We could not prepare that image.")),
+            "image/jpeg",
+            0.9,
+          );
+        });
+      }
+
+      async function uploadProfileImage() {
+        const file = profileImageInput.files[0];
+        if (!file) return existingPhotoUrl;
+        if (!cropImage)
+          throw new Error("Wait for the image preview to finish loading.");
+        const croppedImage = await createCroppedImageBlob();
+        const filePath = `${session.user.id}/profile-image`;
+        const { error } = await supabaseClient.storage
+          .from("professional-profile-images")
+          .upload(filePath, croppedImage, {
+            contentType: "image/jpeg",
+            upsert: true,
+          });
+        if (error) throw error;
+        const { data } = supabaseClient.storage
+          .from("professional-profile-images")
+          .getPublicUrl(filePath);
+        return `${data.publicUrl}?v=${Date.now()}`;
+      }
+
+      function setRequired(section, required) {
+        section.querySelectorAll("input, select").forEach((field) => {
+          field.required = required;
+        });
+      }
+
+      function updateConditionalVerificationFields() {
+        const key = `${category}:${professionalType}`;
+        const requiresLicence = licensedTypes.has(key);
+        const showsBrokerage = brokerageTypes.has(key);
+        licenceArea.classList.toggle("hidden", !requiresLicence);
+        licenceNumberInput.required = requiresLicence;
+        brokerageArea.classList.toggle("hidden", !showsBrokerage);
+        if (!requiresLicence) licenceNumberInput.value = "";
+        if (!showsBrokerage) brokerageNameInput.value = "";
+      }
+
+      function renderSpecialties(saved = []) {
+        selectedSpecialties = new Set(saved);
+        specialtyButtons.innerHTML = "";
+        (specialtyOptions[application.professional_category] || []).forEach(
+          (specialty) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "choice";
+            button.textContent = specialty;
+            if (selectedSpecialties.has(specialty))
+              button.classList.add("selected");
+            button.addEventListener("click", () => {
+              if (selectedSpecialties.has(specialty)) {
+                selectedSpecialties.delete(specialty);
+                button.classList.remove("selected");
+              } else {
+                selectedSpecialties.add(specialty);
+                button.classList.add("selected");
+              }
+            });
+            specialtyButtons.appendChild(button);
+          },
+        );
+      }
+
+      function configureProfileForCategory() {
+        const profileCategory = application.professional_category;
+        const isMortgage = profileCategory === "mortgage";
+        const isContract = profileCategory === "contracts";
+        const isInspector = profileCategory === "inspectors";
+        const isHourly = ["cleaners", "movers", "home-services"].includes(
+          profileCategory,
+        );
+
+        mortgageFields.classList.toggle("hidden", !isMortgage);
+        contractFields.classList.toggle("hidden", !isContract);
+        inspectorFields.classList.toggle("hidden", !isInspector);
+        hourlyFields.classList.toggle("hidden", !isHourly);
+
+        setRequired(mortgageFields, isMortgage);
+        setRequired(contractFields, isContract);
+        setRequired(inspectorFields, isInspector);
+        setRequired(hourlyFields, isHourly);
+
+        identitySummary.innerHTML = "";
+        [
+          [
+            "Name",
+            `${application.first_name || ""} ${application.last_name || ""}`.trim(),
+          ],
+          ["Business", application.business_name || ""],
+          ["Profession", application.professional_type || ""],
+          ["Email", application.email || ""],
+        ].forEach(([label, value]) => {
+          const row = document.createElement("div");
+          const labelElement = document.createElement("span");
+          const valueElement = document.createElement("strong");
+          labelElement.textContent = label;
+          valueElement.textContent = value;
+          row.append(labelElement, valueElement);
+          identitySummary.appendChild(row);
+        });
+
+        renderSpecialties();
+      }
+
+      categoryButtons.querySelectorAll("[data-category]").forEach((button) => {
+        button.addEventListener("click", () => {
+          categoryButtons
+            .querySelectorAll("[data-category]")
+            .forEach((item) => item.classList.remove("selected"));
+          button.classList.add("selected");
+          category = button.dataset.category;
+          professionalType = "";
+          typeButtons.innerHTML = "";
+          const availableTypes = professionalTypes[category];
+          if (availableTypes) {
+            typeArea.classList.remove("hidden");
+            availableTypes.forEach((typeName) => {
+              const typeButton = document.createElement("button");
+              typeButton.type = "button";
+              typeButton.className = "choice";
+              typeButton.textContent = typeName;
+              typeButton.addEventListener("click", () => {
+                typeButtons
+                  .querySelectorAll("button")
+                  .forEach((item) => item.classList.remove("selected"));
+                typeButton.classList.add("selected");
+                professionalType = typeName;
+                updateConditionalVerificationFields();
+              });
+              typeButtons.appendChild(typeButton);
+            });
+          } else {
+            typeArea.classList.add("hidden");
+            professionalType = category;
+          }
+          updateConditionalVerificationFields();
+        });
+      });
+
+      async function loadProfile() {
+        try {
+          const { data, error } = await supabaseClient
+            .from("professional_profiles")
+            .select("*")
+            .eq("user_id", session.user.id)
+            .maybeSingle();
+          if (error) throw error;
+          if (!data) return;
+          existingPhotoUrl = data.photo_url || null;
+          loadCropImage(existingPhotoUrl, false);
+          bioInput.value = data.bio || "";
+          googleUrlInput.value = data.google_business_url || "";
+          experienceInput.value = data.years_experience ?? 0;
+          serviceAreaInput.value = data.service_area || "";
+          rateTermYearsInput.value = data.rate_term_years ?? "";
+          rateTypeInput.value = data.rate_type || "";
+          featuredRateInput.value = data.featured_rate ?? 0;
+          flatFeeInput.value = data.flat_fee ?? 0;
+          housePriceInput.value = data.house_price ?? 0;
+          condoPriceInput.value = data.condo_price ?? 0;
+          townhouseDuplexPriceInput.value = data.townhouse_duplex_price ?? 0;
+          hourlyRateInput.value = data.hourly_rate ?? 0;
+          renderSpecialties(
+            Array.isArray(data.specialties) ? data.specialties : [],
+          );
+        } catch (error) {
+          console.error("Profile loading error:", error);
+          displayMessage(
+            profileMessage,
+            error.message || "We could not load your professional profile.",
+          );
+        }
+      }
+
+      const leadLabels = {
+        primary_residence: "Primary residence",
+        investment: "Investment property",
+        condo: "Condo",
+        house: "House",
+        townhome: "Townhome",
+        duplex: "Duplex",
+        under_500k: "Under $500k",
+        "500k_750k": "$500k–$750k",
+        "750k_1m": "$750k–$1M",
+        "1m_1_5m": "$1M–$1.5M",
+        "1_5m_2m": "$1.5M–$2M",
+        "2m_3m": "$2M–$3M",
+        "3m_plus": "$3M+",
+        not_sure: "Not sure",
+        full_time: "Full-time",
+        part_time: "Part-time",
+        self_employed: "Self-employed",
+        contractor: "Contractor",
+        business_owner: "Business owner",
+        other: "Other",
+      };
+
+      function displayLeadValue(value) {
+        return leadLabels[value] || value || "Not provided";
+      }
+
+      function money(value) {
+        return value == null
+          ? "Not provided"
+          : `$${Number(value).toLocaleString("en-CA")}`;
+      }
+
+      function addLeadRow(container, label, value) {
+        const row = document.createElement("div");
+        row.className = "lead-row";
+        const labelElement = document.createElement("span");
+        labelElement.textContent = label;
+        const valueElement = document.createElement("strong");
+        valueElement.textContent = value;
+        row.append(labelElement, valueElement);
+        container.appendChild(row);
+      }
+
+      async function markLeadRead(leadId) {
+        const { error } = await supabaseClient.rpc(
+          "mark_mortgage_preapproval_read",
+          { request_id: leadId },
+        );
+        if (error) {
+          displayMessage(mortgageLeadsMessage, error.message);
+          return;
+        }
+        await loadMortgageLeads();
+      }
+
+      async function loadMortgageLeads() {
+        clearPageMessage(mortgageLeadsMessage);
+        const { data, error } = await supabaseClient
+          .from("mortgage_preapproval_requests")
+          .select("*")
+          .eq("professional_id", session.user.id)
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          displayMessage(mortgageLeadsMessage, error.message);
+          return;
+        }
+
+        const leads = data || [];
+        const unreadCount = leads.filter(
+          (lead) => !lead.professional_read_at,
+        ).length;
+        mortgageLeadCount.textContent = `${unreadCount} new`;
+        mortgageLeadList.replaceChildren();
+
+        if (leads.length === 0) {
+          const empty = document.createElement("p");
+          empty.className = "empty-leads";
+          empty.textContent = "You do not have any pre-approval leads yet.";
+          mortgageLeadList.appendChild(empty);
+          return;
+        }
+
+        leads.forEach((lead) => {
+          const card = document.createElement("article");
+          card.className = `lead-card${lead.professional_read_at ? "" : " unread"}`;
+          const header = document.createElement("div");
+          header.className = "lead-card-header";
+          const title = document.createElement("h3");
+          title.textContent = `${lead.first_name} ${lead.last_name}`;
+          const date = document.createElement("span");
+          date.className = "lead-date";
+          date.textContent = new Date(lead.created_at).toLocaleString("en-CA");
+          header.append(title, date);
+
+          const grid = document.createElement("div");
+          grid.className = "lead-grid";
+          addLeadRow(grid, "Email", lead.email);
+          addLeadRow(grid, "Phone", lead.phone);
+          addLeadRow(grid, "Occupancy", displayLeadValue(lead.occupancy));
+          addLeadRow(
+            grid,
+            "Property type",
+            displayLeadValue(lead.property_type),
+          );
+          addLeadRow(
+            grid,
+            "Purchase price",
+            displayLeadValue(lead.purchase_price_range),
+          );
+          addLeadRow(grid, "Down payment", money(lead.down_payment));
+          addLeadRow(grid, "Employment", displayLeadValue(lead.employment));
+          addLeadRow(grid, "Annual income", money(lead.annual_income));
+          addLeadRow(
+            grid,
+            "Co-applicant",
+            lead.has_co_applicant ? "Yes" : "No",
+          );
+          if (lead.has_co_applicant) {
+            addLeadRow(
+              grid,
+              "Co-applicant employment",
+              displayLeadValue(lead.co_applicant_employment),
+            );
+            addLeadRow(
+              grid,
+              "Co-applicant income",
+              money(lead.co_applicant_income),
+            );
+          }
+
+          card.append(header, grid);
+          if (!lead.professional_read_at) {
+            const button = document.createElement("button");
+            button.className = "btn secondary lead-action";
+            button.type = "button";
+            button.textContent = "Mark as read";
+            button.addEventListener("click", () => markLeadRead(lead.id));
+            card.appendChild(button);
+          }
+          mortgageLeadList.appendChild(card);
+        });
+      }
+
+      async function loadAccount() {
+        try {
+          if (typeof supabaseClient === "undefined")
+            throw new Error(
+              "Supabase is not connected. Check offver-professional.js.",
+            );
+          if (typeof requireSession !== "function")
+            throw new Error(
+              "The session function is missing from offver-professional.js.",
+            );
+          session = await requireSession();
+          if (!session) return;
+          const { data, error } = await supabaseClient
+            .from("professional_applications")
+            .select("*")
+            .eq("user_id", session.user.id)
+            .maybeSingle();
+          if (error) throw error;
+          application = data;
+          if (!application) {
+            statusTitle.textContent = "Verification required";
+            statusCopy.textContent = "Complete the application below.";
+            statusPill.textContent = "NOT SUBMITTED";
+            verificationForm.classList.remove("hidden");
+            return;
+          }
+
+          const verified = application.status === "verified";
+          statusTitle.textContent = verified
+            ? "Verified professional"
+            : "Application submitted";
+          statusCopy.textContent = verified
+            ? "Your profile can be public and professional features are unlocked."
+            : "Your profile remains private while offver reviews your application.";
+          statusPill.textContent = (
+            application.status || "pending"
+          ).toUpperCase();
+          statusPill.classList.toggle("verified", verified);
+          badgeState.textContent = verified
+            ? "Visible"
+            : "Hidden until approval";
+          leadsState.textContent = verified
+            ? "Unlocked"
+            : "Locked until approval";
+          configureProfileForCategory();
+          profileForm.classList.remove("hidden");
+          await loadProfile();
+          if (verified && application.professional_category === "mortgage") {
+            mortgageLeadsSection.classList.remove("hidden");
+            await loadMortgageLeads();
+          }
+        } catch (error) {
+          console.error("Account loading error:", error);
+          setAccountError(
+            error.message || "Something went wrong while loading your account.",
+          );
+        }
+      }
+
+      verificationForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearPageMessage(verificationMessage);
+        if (!session)
+          return displayMessage(
+            verificationMessage,
+            "Your session has expired. Please sign in again.",
+          );
+        if (!category || !professionalType)
+          return displayMessage(
+            verificationMessage,
+            "Choose your category and professional type.",
+          );
+        if (!firstNameInput.value.trim() || !lastNameInput.value.trim())
+          return displayMessage(
+            verificationMessage,
+            "Enter your first and last name.",
+          );
+        if (!professionalTermsInput.checked)
+          return displayMessage(
+            verificationMessage,
+            "Please agree to the professional terms.",
+          );
+
+        verificationButton.disabled = true;
+        verificationButton.textContent = "Submitting verification...";
+        try {
+          const { error } = await supabaseClient
+            .from("professional_applications")
+            .insert({
+              user_id: session.user.id,
+              professional_category: category,
+              professional_type: professionalType,
+              first_name: firstNameInput.value.trim(),
+              last_name: lastNameInput.value.trim(),
+              email: session.user.email?.toLowerCase() || "",
+              phone_number: phoneInput.value.trim(),
+              business_name: businessNameInput.value.trim(),
+              brokerage_name: brokerageNameInput.value.trim() || null,
+              licence_number: licenceNumberInput.value.trim() || null,
+              status: "pending",
+              professional_terms_accepted_at: new Date().toISOString(),
+            });
+          if (error) throw error;
+
+          // Email offver after the professional application is saved.
+          const { error: notificationError } =
+            await supabaseClient.functions.invoke(
+              "notify-admin-professional-application",
+              {
+                body: {},
+              },
+            );
+
+          if (notificationError) {
+            console.error(
+              "The professional application was saved, but the admin email could not be sent:",
+              notificationError.message,
+            );
+          }
+
+          window.location.reload();
+        } catch (error) {
+          console.error("Verification submission error:", error);
+          displayMessage(
+            verificationMessage,
+            error.message || "We could not submit your application.",
+          );
+        } finally {
+          verificationButton.disabled = false;
+          verificationButton.textContent = "Submit for Verification";
+        }
+      });
+
+      profileForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearPageMessage(profileMessage);
+        if (!session || !application)
+          return displayMessage(
+            profileMessage,
+            "Your session has expired. Please sign in again.",
+          );
+        if (selectedSpecialties.size === 0)
+          return displayMessage(
+            profileMessage,
+            "Select at least one service or specialty.",
+          );
+
+        profileButton.disabled = true;
+        profileButton.textContent = "Saving profile...";
+        const valueOrNull = (input) =>
+          input.value === "" ? null : Number(input.value);
+        try {
+          const photoUrl = await uploadProfileImage();
+          const payload = {
+            user_id: session.user.id,
+            photo_url: photoUrl,
+            bio: bioInput.value.trim() || null,
+            google_business_url: googleUrlInput.value.trim() || null,
+            years_experience: valueOrNull(experienceInput),
+            service_area: serviceAreaInput.value.trim() || null,
+            specialties: Array.from(selectedSpecialties),
+            featured_rate:
+              application.professional_category === "mortgage"
+                ? valueOrNull(featuredRateInput)
+                : null,
+            rate_term_years:
+              application.professional_category === "mortgage"
+                ? valueOrNull(rateTermYearsInput)
+                : null,
+            rate_type:
+              application.professional_category === "mortgage"
+                ? rateTypeInput.value || null
+                : null,
+            flat_fee:
+              application.professional_category === "contracts"
+                ? valueOrNull(flatFeeInput)
+                : null,
+            house_price:
+              application.professional_category === "inspectors"
+                ? valueOrNull(housePriceInput)
+                : null,
+            condo_price:
+              application.professional_category === "inspectors"
+                ? valueOrNull(condoPriceInput)
+                : null,
+            townhouse_duplex_price:
+              application.professional_category === "inspectors"
+                ? valueOrNull(townhouseDuplexPriceInput)
+                : null,
+            hourly_rate: ["cleaners", "movers", "home-services"].includes(
+              application.professional_category,
+            )
+              ? valueOrNull(hourlyRateInput)
+              : null,
+          };
+          const { error } = await supabaseClient
+            .from("professional_profiles")
+            .upsert(payload, { onConflict: "user_id" });
+          if (error) throw error;
+          existingPhotoUrl = photoUrl;
+          profileImageInput.value = "";
+          if (previewObjectUrl) {
+            URL.revokeObjectURL(previewObjectUrl);
+            previewObjectUrl = null;
+          }
+          loadCropImage(existingPhotoUrl, false);
+          displayMessage(
+            profileMessage,
+            "Your private profile has been saved.",
+          );
+        } catch (error) {
+          console.error("Profile saving error:", error);
+          displayMessage(
+            profileMessage,
+            error.message || "We could not save your profile.",
+          );
+        } finally {
+          profileButton.disabled = false;
+          profileButton.textContent = "Save Private Profile";
+        }
+      });
+
+      signOutButton.addEventListener("click", async () => {
+        signOutButton.disabled = true;
+        signOutButton.textContent = "signing out...";
+        try {
+          const { error } = await supabaseClient.auth.signOut();
+          if (error) throw error;
+          window.location.href = "professional-login.html";
+        } catch (error) {
+          setAccountError(error.message || "We could not sign you out.");
+          signOutButton.disabled = false;
+          signOutButton.textContent = "sign out";
+        }
+      });
+
+      loadAccount();
+    </script>
+  </body>
+</html>

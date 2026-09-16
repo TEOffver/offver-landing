@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Buyer verification — offver</title>
+
+    <link rel="icon" href="favicon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --orange: #ff6600;
+        --orange-dark: #e65c00;
+        --charcoal: #1a1a1a;
+        --muted: #6e6e73;
+        --off-white: #f7f7f5;
+        --border: #e1e1de;
+        --white: #ffffff;
+        --error: #b42318;
+      }
+
+      html {
+        background: var(--off-white);
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 48px 24px;
+        background: var(--off-white);
+        color: var(--charcoal);
+        font-family: "Urbanist", Arial, sans-serif;
+      }
+
+      .page {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 800px;
+        padding: 48px;
+        overflow: hidden;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba(26, 26, 26, 0.08);
+      }
+
+      .logo {
+        display: inline-block;
+        margin-bottom: 46px;
+        color: var(--charcoal);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -1.8px;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: var(--orange);
+      }
+
+      .result-heading {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 18px;
+      }
+
+      .result-icon {
+        display: flex;
+        flex: 0 0 62px;
+        align-items: center;
+        justify-content: center;
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        background: var(--orange);
+        color: var(--white);
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .result-icon.neutral {
+        background: var(--muted);
+      }
+
+      .result-icon.error {
+        background: var(--error);
+      }
+
+      h1 {
+        margin: 0;
+        color: var(--charcoal);
+        font-size: 48px;
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        line-height: 1.05;
+      }
+
+      .result-message {
+        margin: 0 0 12px;
+        color: var(--muted);
+        font-size: 21px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      .supporting-message {
+        margin: 0;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.55;
+      }
+
+      .divider {
+        height: 1px;
+        margin: 38px 0 40px;
+        background: var(--border);
+      }
+
+      .professional {
+        text-align: center;
+      }
+
+      .phone {
+        position: relative;
+        width: 310px;
+        height: 625px;
+        margin: 0 auto 42px;
+        padding: 12px;
+        background: #111111;
+        border: 2px solid #3a3a3a;
+        border-radius: 52px;
+        box-shadow:
+          0 22px 42px rgba(26, 26, 26, 0.18),
+          inset 0 0 0 2px #000000;
+      }
+
+      .phone::before {
+        position: absolute;
+        top: 21px;
+        left: 50%;
+        z-index: 3;
+        width: 104px;
+        height: 29px;
+        border-radius: 18px;
+        background: #080808;
+        content: "";
+        transform: translateX(-50%);
+      }
+
+      .phone-screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        padding: 72px 20px 28px;
+        background: var(--white);
+        border-radius: 40px;
+        text-align: left;
+      }
+
+      .phone-time {
+        position: absolute;
+        top: 22px;
+        left: 26px;
+        color: #111111;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .phone-status {
+        position: absolute;
+        top: 22px;
+        right: 24px;
+        color: #111111;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2px;
+      }
+
+      .phone-title {
+        margin: 0 0 7px;
+        color: var(--charcoal);
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .phone-description {
+        margin: 0 0 24px;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .service-card {
+        display: flex;
+        min-height: 110px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 5px;
+        background: #fafaf9;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        text-align: center;
+      }
+
+      .service-icon {
+        margin-bottom: 9px;
+        font-size: 31px;
+        line-height: 1;
+      }
+
+      .service-name {
+        color: var(--charcoal);
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+
+      .phone-home-indicator {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        width: 105px;
+        height: 4px;
+        border-radius: 4px;
+        background: #111111;
+        transform: translateX(-50%);
+      }
+
+      .professional > h2 {
+        margin: 0 0 12px;
+        color: var(--charcoal);
+        font-size: 36px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        line-height: 1.15;
+      }
+
+      .professional-copy {
+        max-width: 620px;
+        margin: 0 auto 28px;
+        color: var(--muted);
+        font-size: 19px;
+        line-height: 1.55;
+      }
+
+      .button {
+        display: inline-block;
+        min-width: 310px;
+        padding: 16px 28px;
+        background: var(--orange);
+        border-radius: 13px;
+        color: var(--white);
+        font-size: 18px;
+        font-weight: 700;
+        text-align: center;
+        text-decoration: none;
+        transition:
+          background 160ms ease,
+          transform 160ms ease;
+      }
+
+      .button:hover {
+        background: var(--orange-dark);
+        transform: translateY(-1px);
+      }
+
+      .button:focus-visible {
+        outline: 3px solid rgba(255, 102, 0, 0.28);
+        outline-offset: 4px;
+      }
+
+      .professional[hidden],
+      .divider[hidden] {
+        display: none;
+      }
+
+      @media (max-width: 700px) {
+        body {
+          padding: 20px 12px;
+        }
+
+        .card {
+          padding: 30px 22px;
+          border-radius: 20px;
+        }
+
+        .logo {
+          margin-bottom: 34px;
+          font-size: 28px;
+        }
+
+        .result-heading {
+          align-items: flex-start;
+          gap: 14px;
+        }
+
+        .result-icon {
+          flex-basis: 48px;
+          width: 48px;
+          height: 48px;
+          font-size: 28px;
+        }
+
+        h1 {
+          padding-top: 3px;
+          font-size: 34px;
+        }
+
+        .result-message {
+          font-size: 18px;
+        }
+
+        .supporting-message {
+          font-size: 16px;
+        }
+
+        .divider {
+          margin: 30px 0 34px;
+        }
+
+        .phone {
+          width: 270px;
+          height: 550px;
+          margin-bottom: 34px;
+          border-radius: 46px;
+        }
+
+        .phone-screen {
+          padding: 66px 16px 24px;
+          border-radius: 35px;
+        }
+
+        .service-card {
+          min-height: 94px;
+        }
+
+        .service-icon {
+          font-size: 27px;
+        }
+
+        .service-name {
+          font-size: 9px;
+        }
+
+        .professional > h2 {
+          font-size: 29px;
+        }
+
+        .professional-copy {
+          font-size: 17px;
+        }
+
+        .button {
+          width: 100%;
+          min-width: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <main class="card">
+        <a class="logo" href="https://offver.com">off<span>ver</span></a>
+
+        <section class="result" aria-live="polite">
+          <div class="result-heading">
+            <div class="result-icon" id="resultIcon">✓</div>
+            <h1 id="resultHeading">Buyer approved</h1>
+          </div>
+
+          <p class="result-message" id="resultMessage">
+            Buyer verification request has been approved successfully.
+          </p>
+
+          <p class="supporting-message" id="supportingMessage">
+            Let your buyer know they can now advertise and message owners.
+          </p>
+        </section>
+
+        <div class="divider" id="divider"></div>
+
+        <section class="professional" id="professionalSection">
+          <div class="phone" aria-label="offver professional services preview">
+            <div class="phone-screen">
+              <div class="phone-time">9:41</div>
+              <div class="phone-status">● ◒ ▰</div>
+
+              <h2 class="phone-title">professional services</h2>
+
+              <p class="phone-description">
+                The people who help you buy, sell, and maintain your home.
+              </p>
+
+              <div class="service-grid">
+                <div class="service-card">
+                  <div class="service-icon">🏛️</div>
+                  <div class="service-name">Mortgage</div>
+                </div>
+
+                <div class="service-card">
+                  <div class="service-icon">📄</div>
+                  <div class="service-name">Contracts</div>
+                </div>
+
+                <div class="service-card">
+                  <div class="service-icon">🛡️</div>
+                  <div class="service-name">Insurance</div>
+                </div>
+
+                <div class="service-card">
+                  <div class="service-icon">🔎</div>
+                  <div class="service-name">Inspectors</div>
+                </div>
+
+                <div class="service-card">
+                  <div class="service-icon">🛠️</div>
+                  <div class="service-name">Home Services</div>
+                </div>
+
+                <div class="service-card">
+                  <div class="service-icon">🚚</div>
+                  <div class="service-name">Movers</div>
+                </div>
+
+                <div class="service-card">
+                  <div class="service-icon">🧹</div>
+                  <div class="service-name">Cleaners</div>
+                </div>
+              </div>
+
+              <div class="phone-home-indicator"></div>
+            </div>
+          </div>
+
+          <h2>Grow your business with offver</h2>
+
+          <p class="professional-copy">
+            Connect with buyers and sellers at the earliest stage of their
+            journey.
+          </p>
+
+          <a class="button" href="professional-signup.html">
+            Join the professional beta
+          </a>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const states = {
+        approved: {
+          title: "Buyer approved — offver",
+          heading: "Buyer approved",
+          message: "Buyer verification request has been approved successfully.",
+          supporting:
+            "Let your buyer know they can now advertise and message owners.",
+          icon: "✓",
+          iconClass: "",
+          showProfessional: true,
+        },
+
+        rejected: {
+          title: "Request not approved — offver",
+          heading: "Request not approved",
+          message: "Buyer verification request was not approved.",
+          supporting:
+            "The buyer has been notified. No further action is required from you.",
+          icon: "×",
+          iconClass: "neutral",
+          showProfessional: true,
+        },
+
+        "already-reviewed": {
+          title: "Request already reviewed — offver",
+          heading: "Request already reviewed",
+          message: "This buyer verification request has already been reviewed.",
+          supporting: "No additional action is required.",
+          icon: "i",
+          iconClass: "neutral",
+          showProfessional: true,
+        },
+
+        error: {
+          title: "Something went wrong — offver",
+          heading: "Something went wrong",
+          message: "We could not process this buyer verification request.",
+          supporting:
+            "The link may be invalid or expired. Please contact offver for assistance.",
+          icon: "!",
+          iconClass: "error",
+          showProfessional: false,
+        },
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const requestedStatus = params.get("status") || "error";
+      const state = states[requestedStatus] || states.error;
+
+      const resultIcon = document.getElementById("resultIcon");
+      const professionalSection = document.getElementById(
+        "professionalSection",
+      );
+      const divider = document.getElementById("divider");
+
+      document.title = state.title;
+      document.getElementById("resultHeading").textContent = state.heading;
+      document.getElementById("resultMessage").textContent = state.message;
+      document.getElementById("supportingMessage").textContent =
+        state.supporting;
+
+      resultIcon.textContent = state.icon;
+      resultIcon.className = `result-icon ${state.iconClass}`.trim();
+
+      if (!state.showProfessional) {
+        professionalSection.hidden = true;
+        divider.hidden = true;
+      }
+    </script>
+  </body>
+</html>
