@@ -11,6 +11,49 @@
     />
     <link rel="stylesheet" href="offver-professional.css" />
     <style>
+      .header {
+        min-height: 76px;
+        padding: 0;
+      }
+
+      .header .container {
+        max-width: 1100px;
+        padding: 0 20px;
+      }
+
+      .header-inner {
+        min-height: 76px;
+        padding: 18px 0;
+        gap: 16px;
+      }
+
+      .header .brand {
+        flex: 0 0 auto;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        white-space: nowrap;
+      }
+
+      .professional-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        white-space: nowrap;
+      }
+
+      .professional-login {
+        color: #1a1a1a;
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .professional-login:hover,
+      .professional-login:focus-visible {
+        color: #ff6600;
+      }
+
       .professional-types {
         padding: 25px 0;
         background: #f7f7f5;
@@ -187,6 +230,22 @@
       }
 
       @media (max-width: 640px) {
+        .header .container {
+          padding: 0 20px;
+        }
+
+        .header .nav {
+          display: none;
+        }
+
+        .professional-header-actions {
+          gap: 12px;
+        }
+
+        .professional-login {
+          font-size: 16px;
+        }
+
         .professional-types {
           padding: 64px 0;
         }
@@ -251,13 +310,20 @@
   <body>
     <header class="header">
       <div class="container header-inner">
-        <a class="brand" href="index.html">off<b>ver</b></a>
+        <a class="brand" href="index.html" aria-label="offver home"
+          >off<b>ver</b></a
+        >
         <nav class="nav">
           <a aria-disabled="true">buyer</a><a aria-disabled="true">seller</a
           ><a class="active" href="professional.html">professional</a
           ><a aria-disabled="true">about</a>
         </nav>
-        <a class="btn" href="professional-signup.html">sign up</a>
+        <div class="professional-header-actions">
+          <a class="professional-login" href="professional-login.html"
+            >log in</a
+          >
+          <a class="btn" href="professional-signup.html">sign up</a>
+        </div>
       </div>
     </header>
     <main>
