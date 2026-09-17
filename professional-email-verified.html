@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Email verified — offver</title>
+
+    <link rel="icon" href="favicon.png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="offver-professional.css" />
+
+    <style>
+      .confirmation-page {
+        min-height: calc(100vh - 76px);
+        padding: 64px 0 90px;
+        display: flex;
+        align-items: center;
+        background:
+          radial-gradient(
+            circle at top right,
+            rgba(255, 102, 0, 0.12),
+            transparent 38%
+          ),
+          linear-gradient(180deg, #ffffff 0%, #f7f7f5 100%);
+      }
+
+      .confirmation-shell {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .confirmation-card {
+        padding: 54px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 32px;
+        background: #ffffff;
+        box-shadow: 0 24px 70px rgba(26, 26, 26, 0.09);
+      }
+
+      .confirmation-icon {
+        width: 72px;
+        height: 72px;
+        margin-bottom: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #ff6600;
+        color: #ffffff;
+        font-size: 34px;
+        font-weight: 800;
+      }
+
+      .confirmation-eyebrow {
+        margin-bottom: 14px;
+        color: #ff6600;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .confirmation-card h1 {
+        max-width: 600px;
+        margin: 0;
+        color: #1a1a1a;
+        font-size: clamp(42px, 7vw, 64px);
+        line-height: 0.98;
+        letter-spacing: -0.055em;
+      }
+
+      .confirmation-intro {
+        max-width: 600px;
+        margin: 24px 0 38px;
+        color: #6e6e73;
+        font-size: 19px;
+        line-height: 1.55;
+      }
+
+      .next-title {
+        margin: 0 0 16px;
+        color: #1a1a1a;
+        font-size: 21px;
+        font-weight: 800;
+      }
+
+      .next-steps {
+        display: grid;
+        gap: 12px;
+      }
+
+      .next-step {
+        min-height: 72px;
+        padding: 15px 18px;
+        border: 1px solid #e7e7e4;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: #f7f7f5;
+      }
+
+      .step-number {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #1a1a1a;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 800;
+      }
+
+      .step-copy {
+        color: #1a1a1a;
+        font-size: 16px;
+        line-height: 1.4;
+        font-weight: 700;
+      }
+
+      .confirmation-action {
+        margin-top: 34px;
+      }
+
+      .continue-button {
+        min-height: 58px;
+        padding: 0 26px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        background: #ff6600;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 800;
+        text-decoration: none;
+        transition:
+          transform 160ms ease,
+          background 160ms ease;
+      }
+
+      .continue-button:hover {
+        transform: translateY(-2px);
+        background: #e95d00;
+      }
+
+      .continue-arrow {
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .sign-in-note {
+        margin: 16px 0 0;
+        color: #6e6e73;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 640px) {
+        .confirmation-page {
+          min-height: calc(100vh - 70px);
+          padding: 28px 0 56px;
+          align-items: flex-start;
+        }
+
+        .confirmation-card {
+          padding: 34px 24px;
+          border-radius: 24px;
+        }
+
+        .confirmation-icon {
+          width: 62px;
+          height: 62px;
+          margin-bottom: 24px;
+          font-size: 29px;
+        }
+
+        .confirmation-card h1 {
+          font-size: 44px;
+        }
+
+        .confirmation-intro {
+          margin-bottom: 30px;
+          font-size: 17px;
+        }
+
+        .continue-button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">off<b>ver</b></a>
+      </div>
+    </header>
+
+    <main class="confirmation-page">
+      <div class="container">
+        <div class="confirmation-shell">
+          <section class="confirmation-card">
+            <div class="confirmation-icon" aria-hidden="true">✓</div>
+
+            <div class="confirmation-eyebrow">Professional beta</div>
+
+            <h1>Your email is verified.</h1>
+
+            <p class="confirmation-intro">
+              You’re ready to complete your professional profile and submit your
+              application for review.
+            </p>
+
+            <h2 class="next-title">What happens next</h2>
+
+            <div class="next-steps">
+              <div class="next-step">
+                <div class="step-number">1</div>
+                <div class="step-copy">
+                  Complete your professional information.
+                </div>
+              </div>
+
+              <div class="next-step">
+                <div class="step-number">2</div>
+                <div class="step-copy">Submit your application.</div>
+              </div>
+
+              <div class="next-step">
+                <div class="step-number">3</div>
+                <div class="step-copy">
+                  Once approved, your profile appears in offver Services.
+                </div>
+              </div>
+            </div>
+
+            <div class="confirmation-action">
+              <a
+                class="continue-button"
+                href="professional-login.html?confirmed=1"
+              >
+                Continue professional verification
+                <span class="continue-arrow" aria-hidden="true">→</span>
+              </a>
+
+              <p class="sign-in-note">
+                Sign in with the professional account you just verified to
+                continue.
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
